@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact | Apple Receipt Batch Renamer</title>
+    <link rel="stylesheet" href="./styles.css?v=20260212zz" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="hero">
+        <p class="eyebrow">Contact</p>
+        <h1>Contact</h1>
+        <p class="lead">Last updated: February 10, 2026</p>
+      </header>
+
+      <section class="notice">
+        <h2>Contact Form</h2>
+        <p>For bug reports, feature requests, or content questions, use the form below.</p>
+        <form
+          class="contact-form js-contact-form"
+          data-lang="en"
+          data-endpoint="https://formspree.io/f/REPLACE_WITH_YOUR_FORM_ID"
+          novalidate
+        >
+          <input class="hp-field" type="text" name="_gotcha" tabindex="-1" autocomplete="off" />
+
+          <div class="contact-grid">
+            <label class="contact-field">
+              <span>Name (optional)</span>
+              <input type="text" name="name" maxlength="80" placeholder="Jane Doe" />
+            </label>
+            <label class="contact-field">
+              <span>Reply email (optional)</span>
+              <input type="email" name="reply_to" maxlength="160" placeholder="name@example.com" />
+            </label>
+          </div>
+
+          <label class="contact-field">
+            <span>Category</span>
+            <select name="category">
+              <option value="bug">Bug report</option>
+              <option value="request">Feature request</option>
+              <option value="content">Content question</option>
+              <option value="other">Other</option>
+            </select>
+          </label>
+
+          <label class="contact-field">
+            <span>Subject</span>
+            <input type="text" name="subject" maxlength="120" required placeholder="Apple receipt tool inquiry" />
+          </label>
+
+          <label class="contact-field">
+            <span>Message</span>
+            <textarea
+              name="message"
+              required
+              rows="6"
+              maxlength="4000"
+              placeholder="Include context, reproduction steps, and expected behavior."
+            ></textarea>
+          </label>
+
+          <label class="contact-consent">
+            <input type="checkbox" name="consent" required />
+            <span>I agree not to send images containing sensitive personal information.</span>
+          </label>
+
+          <div class="contact-actions">
+            <button type="submit" class="contact-submit">Send</button>
+            <p class="contact-status" aria-live="polite"></p>
+          </div>
+        </form>
+
+        <h2>Notes</h2>
+        <ul>
+          <li>If you want a reply, enter your reply email address.</li>
+          <li>File attachments are not supported in this form.</li>
+          <li>Please do not send files containing sensitive personal information.</li>
+          <li>Response may take some time depending on workload.</li>
+        </ul>
+
+        <p class="official-note">This service is operated independently from Apple and is not provided, certified, or guaranteed by Apple.</p>
+
+        <p class="legal-links">
+          <a href="./index.html">Back to Home</a>
+          <a href="./privacy-en.html">Privacy Policy</a>
+          <a href="./terms-en.html">Terms</a>
+        </p>
+      </section>
+    </main>
+    <script defer src="./contact-form.js?v=20260212zz"></script>
+  </body>
+</html>

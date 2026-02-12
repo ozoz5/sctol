@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Appleの領収書のスクショにタイトルを自動でつけるサイト</title>
+    <link rel="stylesheet" href="./styles.css?v=20260212zz" />
+  </head>
+  <body>
+    <div class="bg-glow bg-glow-a"></div>
+    <div class="bg-glow bg-glow-b"></div>
+
+    <main class="app">
+      <div class="brand-bar">
+        <img src="./sctol-logo.svg?v=20260212zz" alt="SCTOL logo" class="brand-logo" />
+        <div class="brand-text">
+          <p class="brand-name">SCTOL</p>
+          <p class="brand-tag">Screenshot Control Tool</p>
+        </div>
+      </div>
+
+      <header class="hero">
+        <div class="lang-switch" role="group" aria-label="language switch">
+          <button id="langJaBtn" type="button">JP</button>
+          <button id="langEnBtn" type="button">EN</button>
+        </div>
+        <p class="eyebrow">Apple Receipt Batch Renamer</p>
+        <h1 id="heroTitle">Appleの領収書のスクショにタイトルを自動でつけるサイト</h1>
+        <p id="heroLead" class="lead">ジョークっぽいのに実用的。タイトルつけるのがめんどくせえスクショ領収書を同じ命名規則で一括整理できます。</p>
+      </header>
+
+      <section id="dropZone" class="drop-zone" aria-label="スクリーンショットまたはPDFをドロップ">
+        <input id="fileInput" class="file-input" type="file" accept="image/*,application/pdf,.pdf" multiple />
+        <p id="dropTitle" class="drop-title">ここにスクリーンショット/PDFをドロップ</p>
+        <p id="dropSub" class="drop-sub">またはファイル選択から追加</p>
+      </section>
+
+      <section class="toolbar">
+        <label class="preset-pill">
+          <input id="compactMode" type="checkbox" checked />
+          <span id="compactLabel">Apple領収書プリセット（会社名 + 日付 + 合計 + サービス名）</span>
+        </label>
+        <label class="preset-pill">
+          <input id="groupByMonth" type="checkbox" checked />
+          <span id="groupLabel">ZIPで月別フォルダ分け</span>
+        </label>
+        <button id="downloadAllBtn" type="button">まとめて保存 (ZIP)</button>
+        <button id="exportCsvBtn" type="button">CSV出力</button>
+        <button id="clearAllBtn" type="button">全件クリア</button>
+        <button id="reloadBtn" type="button">再読み込み</button>
+      </section>
+
+      <section class="status-wrap">
+        <p id="statusText">準備完了</p>
+      </section>
+
+      <section id="noticeSection" class="notice" aria-label="説明と免責">
+        <h2 id="noticeTitle">このサイトの取り扱いと免責</h2>
+        <p id="noticeLead">このツールはブラウザ上で画像を処理し、ファイル名候補を作る用途です。サーバーへ画像をアップロードして保存する機能はありません。</p>
+        <ul id="noticeList"></ul>
+        <p id="officialNote" class="official-note">本サービスはApple社とは独立して運営しており、Apple社の提供・認定・保証を受けたものではありません。</p>
+        <p class="legal-links">
+          <a id="contactLink" href="./contact.html">お問い合わせ</a>
+          <a id="privacyLink" href="./privacy.html">プライバシーポリシー</a>
+          <a id="termsLink" href="./terms.html">利用規約</a>
+        </p>
+      </section>
+
+      <section id="updatesSection" class="updates" aria-label="お知らせ">
+        <h2 id="updatesTitle">お知らせ</h2>
+        <ul id="updatesList"></ul>
+      </section>
+
+      <section class="guides" aria-label="活用ガイド">
+        <h2>活用ガイド</h2>
+        <p class="guides-lead">ブログ機能なしで使える、運用向けの固定ガイドです。</p>
+        <div class="guide-links">
+          <a class="guide-link-card" href="./guide-explainer.html">
+            <span class="guide-tag">解説</span>
+            <strong>このツールで何が起きているか</strong>
+            <small>OCR処理の流れ、得意/苦手、確認ポイント</small>
+          </a>
+          <a class="guide-link-card" href="./guide-comparison.html">
+            <span class="guide-tag">比較</span>
+            <strong>手作業・他手段との比較</strong>
+            <small>どのケースでこのツールを使うべきか</small>
+          </a>
+          <a class="guide-link-card" href="./guide-howto.html">
+            <span class="guide-tag">使い方</span>
+            <strong>初回から運用までの手順</strong>
+            <small>最短の実務フローと注意点</small>
+          </a>
+        </div>
+      </section>
+
+      <section>
+        <ul id="resultList" class="result-list" aria-live="polite"></ul>
+      </section>
+
+      <footer class="site-footer">
+        <p>&copy; 2026 sctol. All rights reserved.</p>
+      </footer>
+    </main>
+
+    <template id="resultTemplate">
+      <li class="card">
+        <div class="thumb-wrap">
+          <img class="thumb" alt="preview" />
+          <button class="loupe-toggle" type="button" aria-pressed="false">虫眼鏡: OFF</button>
+          <div class="thumb-loupe" aria-hidden="true"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-head">
+            <label class="include-toggle"><input class="include-checkbox" type="checkbox" checked /> <span class="include-text">ZIPに含める</span></label>
+            <span class="dup-badge" hidden>重複候補（自動除外）</span>
+          </div>
+
+          <div class="field-grid">
+            <label class="field">
+              <span class="date-label">日付</span>
+              <input class="date-input" type="text" placeholder="YYYYMMDD" />
+            </label>
+            <label class="field">
+              <span class="amount-label">合計</span>
+              <input class="amount-input" type="text" placeholder="¥450" />
+            </label>
+            <label class="field field-wide">
+              <span class="service-label">サービス名 / アプリ名</span>
+              <input class="service-input" type="text" placeholder="iCloud+200GB" />
+            </label>
+          </div>
+
+          <div class="row">
+            <label class="filename-label">最終ファイル名</label>
+            <input class="title-input" type="text" />
+          </div>
+
+          <p class="meta original"></p>
+          <p class="meta thumb-tip">左の原本プレビューを見ながら右の項目を確認できます。</p>
+          <p class="meta scene"></p>
+          <p class="meta excerpt"></p>
+
+          <div class="actions">
+            <button class="retry-btn" type="button">再解析</button>
+            <button class="download-btn" type="button">この名前で単体保存</button>
+          </div>
+        </div>
+      </li>
+    </template>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
+    <script defer src="./service-catalog.js?v=20260212zz"></script>
+    <script defer src="./updates.js?v=20260212zz"></script>
+    <script defer src="./main.js?v=20260212zz"></script>
+
+  </body>
+</html>

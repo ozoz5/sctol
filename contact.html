@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>お問い合わせ | Appleの領収書のスクショにタイトルを自動でつけるサイト</title>
+    <link rel="stylesheet" href="./styles.css?v=20260212zz" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="hero">
+        <p class="eyebrow">Contact</p>
+        <h1>お問い合わせ</h1>
+        <p class="lead">最終更新日: 2026年2月10日</p>
+      </header>
+
+      <section class="notice">
+        <h2>お問い合わせフォーム</h2>
+        <p>不具合報告、要望、掲載内容に関するお問い合わせは以下のフォームから送信できます。</p>
+        <form
+          class="contact-form js-contact-form"
+          data-lang="ja"
+          data-endpoint="https://formspree.io/f/REPLACE_WITH_YOUR_FORM_ID"
+          novalidate
+        >
+          <input class="hp-field" type="text" name="_gotcha" tabindex="-1" autocomplete="off" />
+
+          <div class="contact-grid">
+            <label class="contact-field">
+              <span>お名前（任意）</span>
+              <input type="text" name="name" maxlength="80" placeholder="山田 太郎" />
+            </label>
+            <label class="contact-field">
+              <span>返信先メール（任意）</span>
+              <input type="email" name="reply_to" maxlength="160" placeholder="name@example.com" />
+            </label>
+          </div>
+
+          <label class="contact-field">
+            <span>お問い合わせ種別</span>
+            <select name="category">
+              <option value="bug">不具合報告</option>
+              <option value="request">機能要望</option>
+              <option value="content">掲載内容について</option>
+              <option value="other">その他</option>
+            </select>
+          </label>
+
+          <label class="contact-field">
+            <span>件名</span>
+            <input type="text" name="subject" maxlength="120" required placeholder="Apple領収書ツール 問い合わせ" />
+          </label>
+
+          <label class="contact-field">
+            <span>内容</span>
+            <textarea
+              name="message"
+              required
+              rows="6"
+              maxlength="4000"
+              placeholder="状況・再現手順・期待した動作を記載してください。"
+            ></textarea>
+          </label>
+
+          <label class="contact-consent">
+            <input type="checkbox" name="consent" required />
+            <span>個人情報や機微情報を含む画像は送らないことに同意します。</span>
+          </label>
+
+          <div class="contact-actions">
+            <button type="submit" class="contact-submit">送信する</button>
+            <p class="contact-status" aria-live="polite"></p>
+          </div>
+        </form>
+
+        <h2>注意事項</h2>
+        <ul>
+          <li>返信が必要な場合は、返信先メールを入力してください。</li>
+          <li>添付ファイル送信には対応していません。</li>
+          <li>個人情報や機微情報を含む画像ファイルの送付は控えてください。</li>
+          <li>回答にはお時間をいただく場合があります。</li>
+        </ul>
+
+        <p class="official-note">本サービスはApple社とは独立して運営しており、Apple社の提供・認定・保証を受けたものではありません。</p>
+
+        <p class="legal-links">
+          <a href="./index.html">トップへ戻る</a>
+          <a href="./privacy.html">プライバシーポリシー</a>
+          <a href="./terms.html">利用規約</a>
+        </p>
+      </section>
+    </main>
+    <script defer src="./contact-form.js?v=20260212zz"></script>
+  </body>
+</html>

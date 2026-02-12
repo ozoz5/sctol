@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Leaf Logo Preview</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #0f172a;
+      --line: #e2e8f0;
+    }
+    body {
+      margin: 0;
+      font-family: "Hiragino Sans", "Noto Sans JP", sans-serif;
+      background: radial-gradient(1200px 600px at 10% -10%, #dcfce7 0%, var(--bg) 45%);
+      color: var(--text);
+    }
+    .wrap {
+      max-width: 1120px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    h1 {
+      margin: 0 0 20px;
+      font-size: 28px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px;
+    }
+    .card h2 {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+    .thumb {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 10px;
+      background: #f1f5f9;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+    img {
+      width: 86%;
+      height: 86%;
+      object-fit: contain;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>葉っぱロゴ案</h1>
+    <div class="grid">
+      <article class="card">
+        <h2>A: 斜めシャープ</h2>
+        <div class="thumb"><img src="./leaf-logo-a.svg" alt="Leaf logo A" /></div>
+      </article>
+      <article class="card">
+        <h2>B: 対称シンプル</h2>
+        <div class="thumb"><img src="./leaf-logo-b.svg" alt="Leaf logo B" /></div>
+      </article>
+      <article class="card">
+        <h2>C: 丸みクラシック</h2>
+        <div class="thumb"><img src="./leaf-logo-c.svg" alt="Leaf logo C" /></div>
+      </article>
+    </div>
+  </div>
+</body>
+</html>
