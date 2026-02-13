@@ -12,7 +12,7 @@
       gtag("config", "G-LEQXDJXK6L");
     </script>
     <title>Appleの領収書のスクショにタイトルを自動でつけるサイト</title>
-    <link rel="stylesheet" href="./styles.css?v=20260213ad" />
+    <link rel="stylesheet" href="./styles.css?v=20260213ae" />
   </head>
   <body>
     <div class="bg-glow bg-glow-a"></div>
@@ -66,17 +66,22 @@
         <ul id="resultList" class="result-list" aria-live="polite"></ul>
       </section>
 
-      <section id="noticeSection" class="notice" aria-label="説明と免責">
-        <h2 id="noticeTitle">このサイトの取り扱いと免責</h2>
-        <p id="noticeLead">このツールはブラウザ上で画像を処理し、ファイル名候補を作る用途です。サーバーへ画像をアップロードして保存する機能はありません。</p>
-        <ul id="noticeList"></ul>
-        <p id="officialNote" class="official-note">本サービスはApple社とは独立して運営しており、Apple社の提供・認定・保証を受けたものではありません。</p>
-        <p class="legal-links">
-          <a id="contactLink" href="./contact.html">お問い合わせ</a>
-          <a id="privacyLink" href="./privacy.html">プライバシーポリシー</a>
-          <a id="termsLink" href="./terms.html">利用規約</a>
-        </p>
-      </section>
+      <details id="noticeSection" class="notice notice-fold" aria-label="説明と免責">
+        <summary class="notice-summary">
+          <span id="noticeTitle" class="notice-summary-title">このサイトの取り扱いと免責</span>
+          <span class="notice-summary-icon" aria-hidden="true"></span>
+        </summary>
+        <div class="notice-body">
+          <p id="noticeLead">このツールはブラウザ上で画像を処理し、ファイル名候補を作る用途です。サーバーへ画像をアップロードして保存する機能はありません。</p>
+          <ul id="noticeList"></ul>
+          <p id="officialNote" class="official-note">本サービスはApple社とは独立して運営しており、Apple社の提供・認定・保証を受けたものではありません。</p>
+          <p class="legal-links">
+            <a id="contactLink" href="./contact.html">お問い合わせ</a>
+            <a id="privacyLink" href="./privacy.html">プライバシーポリシー</a>
+            <a id="termsLink" href="./terms.html">利用規約</a>
+          </p>
+        </div>
+      </details>
 
       <section id="updatesSection" class="updates" aria-label="お知らせ">
         <h2 id="updatesTitle">お知らせ</h2>
@@ -158,9 +163,9 @@
     <script defer src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
-    <script defer src="./service-catalog.js?v=20260213ad"></script>
-    <script defer src="./updates.js?v=20260213ad"></script>
-    <script defer src="./main.js?v=20260213ad"></script>
+    <script defer src="./service-catalog.js?v=20260213ae"></script>
+    <script defer src="./updates.js?v=20260213ae"></script>
+    <script defer src="./main.js?v=20260213ae"></script>
 
   </body>
 </html>
