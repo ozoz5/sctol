@@ -1,8 +1,8 @@
 window.SCTOL_UPDATES = [
   {
     date: "2026-02-13",
-    ja: "UIを調整しました（進捗をバッジ直下へ移動、解析結果をドロップゾーン直下へ配置、スクショサンプルをバッジ横のトグル表示に変更）。",
-    en: "Updated UI: moved progress below the security badge, placed results directly under the drop zone, and changed screenshot samples to a toggle next to the badge.",
+    ja: "UIを調整しました（進捗をバッジ直下へ移動、解析結果をドロップゾーン直下へ配置、スクショサンプルをバッジ横トグルに変更し、お知らせ/活用ガイドを折りたたみ化）。",
+    en: "Updated UI: moved progress below the security badge, placed results directly under the drop zone, moved screenshot samples to a badge-side toggle, and collapsed Updates/Guides by default.",
   },
   {
     date: "2026-02-11",

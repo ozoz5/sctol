@@ -8,6 +8,7 @@ const downloadAllBtn = document.getElementById("downloadAllBtn");
 const exportCsvBtn = document.getElementById("exportCsvBtn");
 const clearAllBtn = document.getElementById("clearAllBtn");
 const reloadBtn = document.getElementById("reloadBtn");
+const logoReloadBtn = document.getElementById("logoReloadBtn");
 const compactMode = document.getElementById("compactMode");
 const groupByMonth = document.getElementById("groupByMonth");
 const langJaBtn = document.getElementById("langJaBtn");
@@ -120,7 +121,7 @@ const I18N = {
     terms: "利用規約",
     updatesTitle: "お知らせ",
     updatesAria: "お知らせ",
-    guidesTitle: "ゆるい活用ガイド",
+    guidesTitle: "ゆるい活用ガイド（3本）",
     guidesAria: "活用ガイド",
     guideExplainerTag: "解説",
     guideExplainerTitle: "Appleの領収書スクショ、まさか手打ちでタイトルリネームしてないですよね？",
@@ -239,7 +240,7 @@ const I18N = {
     terms: "Terms",
     updatesTitle: "Updates",
     updatesAria: "Updates",
-    guidesTitle: "A Chill Practical Guide",
+    guidesTitle: "A Chill Practical Guide (3)",
     guidesAria: "Practical guides",
     guideExplainerTag: "Explainer",
     guideExplainerTitle: "You’re not still manually renaming Apple receipt screenshots, are you?",
@@ -343,7 +344,7 @@ const DEFAULT_SERVICE_CATALOG = {
 const SERVICE_CATALOG = getServiceCatalog();
 const LEARN_STORE_KEY = "apple_receipt_renamer_learning_v3";
 const ENABLE_LEARN_OVERRIDES = false;
-const BUILD_ID = "20260213ar";
+const BUILD_ID = "20260213at";
 const APPLE_SINGLE_DEBUG_TARGET = "";
 const PDFJS_WORKER_URL = "https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js";
 const MULTIPLICITY_ONLY_MODE = true;
@@ -417,6 +418,7 @@ function init() {
   exportCsvBtn.addEventListener("click", exportAsCsv);
   clearAllBtn.addEventListener("click", clearAllCards);
   reloadBtn.addEventListener("click", () => window.location.reload());
+  if (logoReloadBtn) logoReloadBtn.addEventListener("click", () => window.location.reload());
   compactMode.addEventListener("change", refreshAllCards);
   langJaBtn.addEventListener("click", () => setLanguage("ja"));
   langEnBtn.addEventListener("click", () => setLanguage("en"));
@@ -553,6 +555,10 @@ function applyLanguage() {
   exportCsvBtn.textContent = tr.exportCsv;
   clearAllBtn.textContent = tr.clearAll;
   reloadBtn.textContent = tr.reload;
+  if (logoReloadBtn) {
+    logoReloadBtn.setAttribute("aria-label", tr.reload);
+    logoReloadBtn.title = tr.reload;
+  }
   noticeTitle.textContent = tr.noticeTitle;
   if (noticeSection) noticeSection.setAttribute("aria-label", tr.noticeAria);
   noticeLead.textContent = tr.noticeLead;

@@ -20,7 +20,9 @@
 
     <main class="app">
       <div class="brand-bar">
-        <img src="./sctol-logo.svg?v=20260213ai" alt="SCTOL logo" class="brand-logo" />
+        <button id="logoReloadBtn" class="brand-logo-btn" type="button" aria-label="再読み込み" title="再読み込み">
+          <img src="./sctol-logo.svg?v=20260213ai" alt="SCTOL logo" class="brand-logo" />
+        </button>
         <div class="brand-text">
           <p class="brand-name">SCTOL</p>
           <p class="brand-kana">スクトル</p>
@@ -166,31 +168,41 @@
         </div>
       </details>
 
-      <section id="updatesSection" class="updates" aria-label="お知らせ">
-        <h2 id="updatesTitle">お知らせ</h2>
-        <ul id="updatesList"></ul>
-      </section>
-
-      <section id="guidesSection" class="guides" aria-label="活用ガイド">
-        <h2 id="guidesTitle">ゆるい活用ガイド</h2>
-        <div class="guide-links">
-          <a id="guideExplainerLink" class="guide-link-card" href="./guide-explainer.html">
-            <span id="guideExplainerTag" class="guide-tag">解説</span>
-            <strong id="guideExplainerTitle">Appleの領収書スクショ、まさか手打ちでタイトルリネームしてないですよね？</strong>
-            <small id="guideExplainerSub">もちろん私はしてます。</small>
-          </a>
-          <a id="guideComparisonLink" class="guide-link-card" href="./guide-comparison.html">
-            <span id="guideComparisonTag" class="guide-tag">比較</span>
-            <strong id="guideComparisonTitle">おい…他に方法はなかったのか？</strong>
-            <small id="guideComparisonSub">みんな同じところで詰まってる。</small>
-          </a>
-          <a id="guideHowtoLink" class="guide-link-card" href="./guide-howto.html">
-            <span id="guideHowtoTag" class="guide-tag">使い方</span>
-            <strong id="guideHowtoTitle">使い方（というほどのものでもない）</strong>
-            <small id="guideHowtoSub">以上。</small>
-          </a>
+      <details id="updatesSection" class="updates notice-fold" aria-label="お知らせ">
+        <summary class="notice-summary">
+          <span id="updatesTitle" class="notice-summary-title">お知らせ</span>
+          <span class="notice-summary-icon" aria-hidden="true"></span>
+        </summary>
+        <div class="updates-body">
+          <ul id="updatesList"></ul>
         </div>
-      </section>
+      </details>
+
+      <details id="guidesSection" class="guides notice-fold" aria-label="活用ガイド">
+        <summary class="notice-summary">
+          <span id="guidesTitle" class="notice-summary-title">ゆるい活用ガイド（3本）</span>
+          <span class="notice-summary-icon" aria-hidden="true"></span>
+        </summary>
+        <div class="guides-body">
+          <div class="guide-links">
+            <a id="guideExplainerLink" class="guide-link-card" href="./guide-explainer.html">
+              <span id="guideExplainerTag" class="guide-tag">解説</span>
+              <strong id="guideExplainerTitle">Appleの領収書スクショ、まさか手打ちでタイトルリネームしてないですよね？</strong>
+              <small id="guideExplainerSub">もちろん私はしてます。</small>
+            </a>
+            <a id="guideComparisonLink" class="guide-link-card" href="./guide-comparison.html">
+              <span id="guideComparisonTag" class="guide-tag">比較</span>
+              <strong id="guideComparisonTitle">おい…他に方法はなかったのか？</strong>
+              <small id="guideComparisonSub">みんな同じところで詰まってる。</small>
+            </a>
+            <a id="guideHowtoLink" class="guide-link-card" href="./guide-howto.html">
+              <span id="guideHowtoTag" class="guide-tag">使い方</span>
+              <strong id="guideHowtoTitle">使い方（というほどのものでもない）</strong>
+              <small id="guideHowtoSub">以上。</small>
+            </a>
+          </div>
+        </div>
+      </details>
 
       <footer class="site-footer">
         <p>&copy; 2026 sctol. All rights reserved.</p>
@@ -254,9 +266,9 @@
     <script defer src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
-    <script defer src="./service-catalog.js?v=20260213ap"></script>
-    <script defer src="./updates.js?v=20260213aq"></script>
-    <script defer src="./main.js?v=20260213ar"></script>
+    <script defer src="./service-catalog.js?v=20260213at"></script>
+    <script defer src="./updates.js?v=20260213at"></script>
+    <script defer src="./main.js?v=20260213at"></script>
 
   </body>
 </html>
