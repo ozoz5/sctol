@@ -127,8 +127,16 @@ h1 {
   font-size: 0.98rem;
 }
 
+.meta-inline-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+
 .security-strip {
-  margin-bottom: 12px;
+  margin-bottom: 0;
 }
 
 .security-pill {
@@ -165,65 +173,243 @@ h1 {
 }
 
 .drop-zone {
-  border: 1px solid var(--line);
+  border: 1.5px solid #93c5fd;
   border-radius: 12px;
-  background: var(--surface);
-  padding: 20px;
+  background: linear-gradient(180deg, #f0f7ff 0%, #eaf3ff 100%);
+  min-height: 210px;
+  padding: 28px 20px;
   text-align: center;
-  transition: border-color 150ms ease, box-shadow 150ms ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.72);
+  transition: border-color 150ms ease, box-shadow 150ms ease, background-color 150ms ease;
 }
 
 .drop-zone.active {
-  border-color: #93c5fd;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.14);
+  border-color: #2563eb;
+  background: #dbeafe;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.18);
 }
 
 .file-input {
   width: min(430px, 100%);
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 
 .drop-title {
   margin: 0;
-  font-size: 1.25rem;
+  font-size: 1.36rem;
   font-weight: 700;
+  color: #1e3a8a;
 }
 
 .drop-sub {
-  margin: 6px 0 0;
-  color: var(--muted);
+  margin: 0;
+  color: #475569;
 }
 
-.flow-strip {
-  margin: 12px 0;
+.sample-shot {
+  margin: 10px auto 12px;
+  width: min(420px, 100%);
   border: 1px solid var(--line);
   border-radius: 12px;
-  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
-  padding: 12px 14px;
+  background: var(--surface);
 }
 
-.flow-title {
-  margin: 0 0 10px;
-  color: #475569;
-  font-size: 0.82rem;
-  font-weight: 800;
-  letter-spacing: 0.02em;
+.sample-fold {
+  padding: 0;
+  overflow: hidden;
 }
 
-.flow-row {
+.sample-inline {
+  margin: 0;
+  width: auto;
+  min-width: 220px;
+  max-width: min(420px, 100%);
+}
+
+.sample-inline[open] {
+  width: min(420px, 100%);
+}
+
+.sample-summary {
+  list-style: none;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
+  gap: 10px;
+  padding: 10px 12px;
+}
+
+.sample-summary::-webkit-details-marker {
+  display: none;
+}
+
+.sample-summary-title {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.sample-inline .sample-summary {
+  padding: 8px 12px;
+}
+
+.sample-inline .sample-summary-title {
+  color: #334155;
+  white-space: nowrap;
+}
+
+.sample-summary-icon {
+  width: 9px;
+  height: 9px;
+  border-right: 2px solid #64748b;
+  border-bottom: 2px solid #64748b;
+  transform: rotate(45deg);
+  transition: transform 0.15s ease;
+}
+
+.sample-fold[open] .sample-summary-icon {
+  transform: rotate(225deg);
+}
+
+.sample-body {
+  padding: 0 12px 12px;
+}
+
+.sample-inline .sample-body {
+  position: static;
+  width: auto;
+  margin-top: 8px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  box-shadow: none;
+}
+
+.sample-head {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.sample-tabs {
+  display: inline-flex;
+  gap: 6px;
+}
+
+.sample-tab {
+  border: 1px solid #cbd5e1;
+  border-radius: 999px;
+  background: #f8fafc;
+  color: #475569;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.sample-tab.active {
+  color: #fff;
+  background: #1d4ed8;
+  border-color: #1d4ed8;
+}
+
+.sample-lead {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 0.84rem;
+  line-height: 1.5;
+}
+
+.sample-card {
+  margin: 0;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background: #f8fafc;
+  padding: 8px;
+}
+
+.sample-card-compact {
+  margin-top: 10px;
+}
+
+.sample-card img {
+  width: 100%;
+  max-height: 165px;
+  height: auto;
+  object-fit: contain;
+  border: 1px solid #d7dde6;
+  border-radius: 8px;
+  display: block;
+  background: #ffffff;
+}
+
+.sample-card figcaption {
+  margin-top: 6px;
+  color: #475569;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.sample-preview-btn {
+  margin-top: 8px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 12px;
+  background: var(--surface);
+  color: #334155;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.sample-preview-btn:hover {
+  border-color: #93c5fd;
+  background: #eff6ff;
+}
+
+.flow-strip {
+  margin: 8px 0;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.flow-title {
+  margin: 0;
+  color: #475569;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.flow-row {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
 }
 
 .flow-step {
   flex: 1;
   min-width: 0;
-  display: grid;
-  justify-items: center;
-  gap: 4px;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  text-align: left;
 }
 
 .flow-step-highlight .flow-step-label,
@@ -232,8 +418,8 @@ h1 {
 }
 
 .flow-icon {
-  width: 44px;
-  height: 44px;
+  width: 30px;
+  height: 30px;
   border-radius: 999px;
   border: 1px solid #dbe3ec;
   display: grid;
@@ -242,8 +428,8 @@ h1 {
 }
 
 .flow-icon svg {
-  width: 20px;
-  height: 20px;
+  width: 14px;
+  height: 14px;
   stroke: currentColor;
   stroke-width: 2;
   fill: none;
@@ -268,23 +454,78 @@ h1 {
 .flow-step-label {
   margin: 0;
   color: #1e293b;
-  font-size: 0.82rem;
+  font-size: 0.74rem;
   font-weight: 700;
-  line-height: 1.35;
+  line-height: 1.2;
+  white-space: nowrap;
 }
 
 .flow-step-sub {
-  margin: 0;
-  color: #64748b;
-  font-size: 0.74rem;
-  line-height: 1.3;
+  display: none;
 }
 
 .flow-arrow {
   color: #94a3b8;
-  font-size: 1.2rem;
+  font-size: 1rem;
   line-height: 1;
-  margin-top: -16px;
+  margin-top: 0;
+}
+
+.sample-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+}
+
+.sample-modal[hidden] {
+  display: none;
+}
+
+.sample-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  border: none;
+  margin: 0;
+  padding: 0;
+  background: rgba(15, 23, 42, 0.7);
+  cursor: pointer;
+}
+
+.sample-modal-panel {
+  position: relative;
+  z-index: 1;
+  width: min(900px, 92vw);
+  max-height: 90vh;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid #dbe3ec;
+  padding: 10px;
+}
+
+.sample-modal-panel img {
+  width: 100%;
+  max-height: calc(90vh - 20px);
+  object-fit: contain;
+  border-radius: 8px;
+  display: block;
+  background: #f8fafc;
+}
+
+.sample-modal-close {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #d1d5db;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.95);
+  color: #334155;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
 }
 
 .toolbar {
@@ -391,7 +632,7 @@ h1 {
 
 .status-wrap {
   min-height: 22px;
-  margin-bottom: 10px;
+  margin: 0 0 10px;
 }
 
 #statusText {
@@ -1016,9 +1257,55 @@ textarea {
 }
 
 @media (max-width: 760px) {
+  .meta-inline-row {
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .security-strip {
+    margin-bottom: 6px;
+  }
+
+  .flow-strip {
+    display: block;
+    padding: 10px 10px;
+  }
+
+  .flow-title {
+    margin: 0 0 8px;
+  }
+
+  .drop-zone {
+    min-height: 178px;
+    padding: 20px 14px;
+  }
+
+  .drop-title {
+    font-size: 1.14rem;
+  }
+
   .security-pill {
     width: 100%;
     justify-content: center;
+  }
+
+  .sample-inline {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .sample-inline .sample-summary-title {
+    white-space: normal;
+  }
+
+  .sample-inline .sample-body {
+    position: static;
+    width: auto;
+    border: 0;
+    border-top: 1px solid #e5e7eb;
+    border-radius: 0 0 12px 12px;
+    box-shadow: none;
   }
 
   .flow-row {
@@ -1031,6 +1318,11 @@ textarea {
     border: 1px solid #e2e8f0;
     border-radius: 10px;
     padding: 8px 10px;
+    justify-content: flex-start;
+  }
+
+  .flow-step-sub {
+    display: block;
   }
 
   .flow-arrow {

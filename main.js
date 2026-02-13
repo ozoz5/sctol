@@ -17,6 +17,16 @@ const heroLead = document.getElementById("heroLead");
 const securityBadgeText = document.getElementById("securityBadgeText");
 const dropTitle = document.getElementById("dropTitle");
 const dropSub = document.getElementById("dropSub");
+const sampleTitle = document.getElementById("sampleTitle");
+const sampleLead = document.getElementById("sampleLead");
+const sampleLangJpBtn = document.getElementById("sampleLangJpBtn");
+const sampleLangEnBtn = document.getElementById("sampleLangEnBtn");
+const sampleThumbImg = document.getElementById("sampleThumbImg");
+const sampleThumbCaption = document.getElementById("sampleThumbCaption");
+const samplePreviewBtn = document.getElementById("samplePreviewBtn");
+const sampleModal = document.getElementById("sampleModal");
+const sampleModalImg = document.getElementById("sampleModalImg");
+const sampleModalCloseBtn = document.getElementById("sampleModalCloseBtn");
 const flowTitle = document.getElementById("flowTitle");
 const flowStep1Label = document.getElementById("flowStep1Label");
 const flowStep1Sub = document.getElementById("flowStep1Sub");
@@ -59,15 +69,26 @@ let updatesData = [];
 const LANG_STORE_KEY = "apple_receipt_lang";
 const BUILD_SEEN_KEY = "sctol_last_seen_build";
 let currentLang = localStorage.getItem(LANG_STORE_KEY) || "ja";
+let sampleLocale = currentLang === "en" ? "en" : "ja";
 
 const I18N = {
   ja: {
     title: "メールで送られてきたAppleの領収書スクショに自動でタイトルをつけるツール",
     hero: "ジョークっぽいのに実用的。タイトルつけるのがめんどくせえスクショ領収書を同じ命名規則で一括整理できます。",
     securityBadge: "画像は外部送信されません",
-    dropTitle: "ここにスクリーンショット/PDFをドロップ",
+    dropTitle: "ここにスクリーンショットをドロップ",
     dropSub: "またはファイル選択から追加",
-    dropAria: "スクリーンショットまたはPDFをドロップ",
+    dropAria: "スクリーンショットをドロップ",
+    sampleTitle: "スクショサンプルを見る",
+    sampleLead: "メールで受け取った領収書スクショ全体が写っている画像を入れてください。",
+    sampleCaptionJp: "日本語サンプル",
+    sampleCaptionEn: "英語サンプル",
+    sampleTabJp: "JP",
+    sampleTabEn: "EN",
+    samplePreviewOpen: "拡大表示",
+    samplePreviewClose: "プレビューを閉じる",
+    sampleAltJp: "日本語の領収書スクリーンショット見本",
+    sampleAltEn: "英語の領収書スクリーンショット見本",
     flowTitle: "3ステップで完了",
     flowStep1Label: "画像を選択",
     flowStep1Sub: "ドラッグ&ドロップ",
@@ -174,9 +195,19 @@ const I18N = {
     title: "Auto-title your Apple receipt screenshots",
     hero: "A joke-ish tool that's actually useful. Batch-organize Apple receipt screenshots with one naming rule.",
     securityBadge: "Your images never leave this browser",
-    dropTitle: "Drop screenshots or PDFs here",
+    dropTitle: "Drop screenshots here",
     dropSub: "or add files from file picker",
-    dropAria: "Drop screenshots or PDFs",
+    dropAria: "Drop screenshots",
+    sampleTitle: "View screenshot samples",
+    sampleLead: "Use full-page receipt screenshots from email, like these samples.",
+    sampleCaptionJp: "Japanese sample",
+    sampleCaptionEn: "English sample",
+    sampleTabJp: "JP",
+    sampleTabEn: "EN",
+    samplePreviewOpen: "Open full size",
+    samplePreviewClose: "Close preview",
+    sampleAltJp: "Sample receipt screenshot in Japanese",
+    sampleAltEn: "Sample receipt screenshot in English",
     flowTitle: "Done in 3 steps",
     flowStep1Label: "Select files",
     flowStep1Sub: "Drag & drop",
@@ -312,7 +343,7 @@ const DEFAULT_SERVICE_CATALOG = {
 const SERVICE_CATALOG = getServiceCatalog();
 const LEARN_STORE_KEY = "apple_receipt_renamer_learning_v3";
 const ENABLE_LEARN_OVERRIDES = false;
-const BUILD_ID = "20260213ag";
+const BUILD_ID = "20260213ar";
 const APPLE_SINGLE_DEBUG_TARGET = "";
 const PDFJS_WORKER_URL = "https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js";
 const MULTIPLICITY_ONLY_MODE = true;
@@ -415,6 +446,22 @@ function init() {
     dropZone.classList.remove("active");
     handleFiles(e.dataTransfer?.files);
   });
+
+  if (sampleLangJpBtn) sampleLangJpBtn.addEventListener("click", () => setSampleLocale("ja"));
+  if (sampleLangEnBtn) sampleLangEnBtn.addEventListener("click", () => setSampleLocale("en"));
+  if (samplePreviewBtn) samplePreviewBtn.addEventListener("click", openSampleModal);
+  if (sampleModalCloseBtn) sampleModalCloseBtn.addEventListener("click", closeSampleModal);
+  if (sampleModal) {
+    sampleModal.addEventListener("click", (e) => {
+      const target = e.target;
+      if (target instanceof HTMLElement && target.dataset.close === "sample-modal") {
+        closeSampleModal();
+      }
+    });
+  }
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeSampleModal();
+  });
 }
 
 function setupPdfRuntime() {
@@ -485,6 +532,13 @@ function applyLanguage() {
   securityBadgeText.textContent = tr.securityBadge;
   dropTitle.textContent = tr.dropTitle;
   dropSub.textContent = tr.dropSub;
+  if (sampleTitle) sampleTitle.textContent = tr.sampleTitle;
+  if (sampleLead) sampleLead.textContent = tr.sampleLead;
+  if (sampleLangJpBtn) sampleLangJpBtn.textContent = tr.sampleTabJp;
+  if (sampleLangEnBtn) sampleLangEnBtn.textContent = tr.sampleTabEn;
+  if (samplePreviewBtn) samplePreviewBtn.textContent = tr.samplePreviewOpen;
+  if (sampleModalCloseBtn) sampleModalCloseBtn.setAttribute("aria-label", tr.samplePreviewClose);
+  setSampleLocale(sampleLocale);
   if (dropZone) dropZone.setAttribute("aria-label", tr.dropAria);
   flowTitle.textContent = tr.flowTitle;
   flowStep1Label.textContent = tr.flowStep1Label;
@@ -554,6 +608,58 @@ function applyLanguage() {
   for (const item of batchItems) {
     updateCardLanguage(item);
   }
+}
+
+function sampleAsset(locale = "ja") {
+  if (locale === "en") {
+    return {
+      src: "./sanple_receipt_EN.png",
+      captionKey: "sampleCaptionEn",
+      altKey: "sampleAltEn",
+    };
+  }
+  return {
+    src: "./sanple_receipt_JP.png",
+    captionKey: "sampleCaptionJp",
+    altKey: "sampleAltJp",
+  };
+}
+
+function setSampleLocale(locale = "ja") {
+  sampleLocale = locale === "en" ? "en" : "ja";
+  const tr = I18N[currentLang] || I18N.ja;
+  const asset = sampleAsset(sampleLocale);
+  if (sampleLangJpBtn) {
+    const active = sampleLocale === "ja";
+    sampleLangJpBtn.classList.toggle("active", active);
+    sampleLangJpBtn.setAttribute("aria-selected", active ? "true" : "false");
+  }
+  if (sampleLangEnBtn) {
+    const active = sampleLocale === "en";
+    sampleLangEnBtn.classList.toggle("active", active);
+    sampleLangEnBtn.setAttribute("aria-selected", active ? "true" : "false");
+  }
+  if (sampleThumbImg) {
+    sampleThumbImg.src = asset.src;
+    sampleThumbImg.alt = tr[asset.altKey] || "";
+  }
+  if (sampleModalImg) {
+    sampleModalImg.src = asset.src;
+    sampleModalImg.alt = tr[asset.altKey] || "";
+  }
+  if (sampleThumbCaption) sampleThumbCaption.textContent = tr[asset.captionKey] || "";
+}
+
+function openSampleModal() {
+  if (!sampleModal) return;
+  sampleModal.hidden = false;
+  sampleModal.setAttribute("aria-hidden", "false");
+}
+
+function closeSampleModal() {
+  if (!sampleModal || sampleModal.hidden) return;
+  sampleModal.hidden = true;
+  sampleModal.setAttribute("aria-hidden", "true");
 }
 
 async function loadUpdates() {
