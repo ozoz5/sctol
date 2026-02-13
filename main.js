@@ -312,7 +312,7 @@ const DEFAULT_SERVICE_CATALOG = {
 const SERVICE_CATALOG = getServiceCatalog();
 const LEARN_STORE_KEY = "apple_receipt_renamer_learning_v3";
 const ENABLE_LEARN_OVERRIDES = false;
-const BUILD_ID = "20260213af";
+const BUILD_ID = "20260213ag";
 const APPLE_SINGLE_DEBUG_TARGET = "";
 const PDFJS_WORKER_URL = "https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js";
 const MULTIPLICITY_ONLY_MODE = true;
@@ -394,7 +394,7 @@ function init() {
   clearAllBtn.disabled = true;
   applyLanguage();
   updateToolbarState();
-  setStatus(withBuildTag(t("statusPresetOn")));
+  setStatus(t("statusReady"));
   notifyBuildUpdateIfNeeded();
   loadUpdates();
 
@@ -548,7 +548,7 @@ function applyLanguage() {
     statusText.textContent === I18N.ja.statusReady ||
     statusText.textContent === I18N.en.statusReady
   ) {
-    setStatus(withBuildTag(tr.statusReady));
+    setStatus(tr.statusReady);
   }
   renderUpdates();
   for (const item of batchItems) {
@@ -898,7 +898,7 @@ function clearAllCards() {
   resultList.innerHTML = "";
   fileInput.value = "";
   updateToolbarState();
-  setStatus(withBuildTag(t("statusCleared")));
+  setStatus(t("statusCleared"));
 }
 
 function updateToolbarState() {
@@ -1655,7 +1655,7 @@ function refreshAllCards() {
   }
   recomputeDuplicates();
   updateToolbarState();
-  setStatus(withBuildTag(compactMode.checked ? t("statusPresetOn") : t("statusPresetOff")));
+  setStatus(t("statusReady"));
 }
 
 function recomputeDuplicates() {
