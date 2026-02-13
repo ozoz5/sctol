@@ -28,6 +28,10 @@ const samplePreviewBtn = document.getElementById("samplePreviewBtn");
 const sampleModal = document.getElementById("sampleModal");
 const sampleModalImg = document.getElementById("sampleModalImg");
 const sampleModalCloseBtn = document.getElementById("sampleModalCloseBtn");
+const receiptPreviewModal = document.getElementById("receiptPreviewModal");
+const receiptPreviewImg = document.getElementById("receiptPreviewImg");
+const receiptPreviewCaption = document.getElementById("receiptPreviewCaption");
+const receiptPreviewCloseBtn = document.getElementById("receiptPreviewCloseBtn");
 const flowTitle = document.getElementById("flowTitle");
 const flowStep1Label = document.getElementById("flowStep1Label");
 const flowStep1Sub = document.getElementById("flowStep1Sub");
@@ -71,6 +75,16 @@ const LANG_STORE_KEY = "apple_receipt_lang";
 const BUILD_SEEN_KEY = "sctol_last_seen_build";
 let currentLang = localStorage.getItem(LANG_STORE_KEY) || "ja";
 let sampleLocale = currentLang === "en" ? "en" : "ja";
+const IS_TOUCH_DEVICE = (() => {
+  try {
+    return Boolean(
+      (window.matchMedia && window.matchMedia("(pointer: coarse)").matches) ||
+      (typeof navigator !== "undefined" && navigator.maxTouchPoints > 0)
+    );
+  } catch {
+    return false;
+  }
+})();
 
 const I18N = {
   ja: {
@@ -127,7 +141,7 @@ const I18N = {
     guideExplainerTitle: "Appleの領収書スクショ、まさか手打ちでタイトルリネームしてないですよね？",
     guideExplainerSub: "もちろん私はしてます。",
     guideComparisonTag: "比較",
-    guideComparisonTitle: "おい…他に方法はなかったのか？",
+    guideComparisonTitle: "Appleの領収書はPDFでダウンロードできない？現実的な整理方法",
     guideComparisonSub: "みんな同じところで詰まってる。",
     guideHowtoTag: "使い方",
     guideHowtoTitle: "使い方（というほどのものでもない）",
@@ -185,8 +199,11 @@ const I18N = {
     service: "サービス名 / アプリ名",
     filename: "最終ファイル名",
     thumbTip: "左の原本プレビューを見ながら右の項目を確認できます。",
+    thumbTipTouch: "画像をタップすると拡大確認できます。",
     loupeOn: "虫眼鏡: ON",
     loupeOff: "虫眼鏡: OFF",
+    thumbPreviewOpen: "拡大確認",
+    thumbPreviewClose: "拡大プレビューを閉じる",
     downloadSingle: "この名前で単体保存",
     originalPrefix: "元ファイル:",
     savedPrefix: "保存済み:",
@@ -304,8 +321,11 @@ const I18N = {
     service: "Service / App",
     filename: "Final Filename",
     thumbTip: "Compare the original preview on the left with the extracted fields on the right.",
+    thumbTipTouch: "Tap the image to open a larger preview.",
     loupeOn: "Loupe: ON",
     loupeOff: "Loupe: OFF",
+    thumbPreviewOpen: "Preview zoom",
+    thumbPreviewClose: "Close zoom preview",
     downloadSingle: "Download this file",
     originalPrefix: "Original:",
     savedPrefix: "Saved:",
@@ -344,7 +364,7 @@ const DEFAULT_SERVICE_CATALOG = {
 const SERVICE_CATALOG = getServiceCatalog();
 const LEARN_STORE_KEY = "apple_receipt_renamer_learning_v3";
 const ENABLE_LEARN_OVERRIDES = false;
-const BUILD_ID = "20260213at";
+const BUILD_ID = "20260213av";
 const APPLE_SINGLE_DEBUG_TARGET = "";
 const PDFJS_WORKER_URL = "https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js";
 const MULTIPLICITY_ONLY_MODE = true;
@@ -461,8 +481,19 @@ function init() {
       }
     });
   }
+  if (receiptPreviewCloseBtn) receiptPreviewCloseBtn.addEventListener("click", closeReceiptPreview);
+  if (receiptPreviewModal) {
+    receiptPreviewModal.addEventListener("click", (e) => {
+      const target = e.target;
+      if (target instanceof HTMLElement && target.dataset.close === "receipt-preview-modal") {
+        closeReceiptPreview();
+      }
+    });
+  }
   window.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeSampleModal();
+    if (e.key !== "Escape") return;
+    closeSampleModal();
+    closeReceiptPreview();
   });
 }
 
@@ -540,6 +571,10 @@ function applyLanguage() {
   if (sampleLangEnBtn) sampleLangEnBtn.textContent = tr.sampleTabEn;
   if (samplePreviewBtn) samplePreviewBtn.textContent = tr.samplePreviewOpen;
   if (sampleModalCloseBtn) sampleModalCloseBtn.setAttribute("aria-label", tr.samplePreviewClose);
+  if (receiptPreviewCloseBtn) {
+    receiptPreviewCloseBtn.setAttribute("aria-label", tr.thumbPreviewClose);
+    receiptPreviewCloseBtn.title = tr.thumbPreviewClose;
+  }
   setSampleLocale(sampleLocale);
   if (dropZone) dropZone.setAttribute("aria-label", tr.dropAria);
   flowTitle.textContent = tr.flowTitle;
@@ -666,6 +701,22 @@ function closeSampleModal() {
   if (!sampleModal || sampleModal.hidden) return;
   sampleModal.hidden = true;
   sampleModal.setAttribute("aria-hidden", "true");
+}
+
+function openReceiptPreview(item) {
+  if (!item || !receiptPreviewModal || !receiptPreviewImg) return;
+  receiptPreviewImg.src = item.previewUrl || item.thumb?.src || "";
+  const label = originalLabelForFile(item.file);
+  receiptPreviewImg.alt = label;
+  if (receiptPreviewCaption) receiptPreviewCaption.textContent = label;
+  receiptPreviewModal.hidden = false;
+  receiptPreviewModal.setAttribute("aria-hidden", "false");
+}
+
+function closeReceiptPreview() {
+  if (!receiptPreviewModal || receiptPreviewModal.hidden) return;
+  receiptPreviewModal.hidden = true;
+  receiptPreviewModal.setAttribute("aria-hidden", "true");
 }
 
 async function loadUpdates() {
@@ -999,6 +1050,7 @@ async function analyzeCard(item, isRetry = false) {
 }
 
 function clearAllCards() {
+  closeReceiptPreview();
   for (const item of batchItems) {
     try {
       if (item.previewUrl) URL.revokeObjectURL(item.previewUrl);
@@ -1228,6 +1280,7 @@ function buildCard(file) {
   const thumb = node.querySelector(".thumb");
   const loupe = node.querySelector(".thumb-loupe");
   const loupeToggle = node.querySelector(".loupe-toggle");
+  const thumbPreviewBtn = node.querySelector(".thumb-preview-btn");
   const includeCheckbox = node.querySelector(".include-checkbox");
   const dupBadge = node.querySelector(".dup-badge");
   const dateInput = node.querySelector(".date-input");
@@ -1255,6 +1308,7 @@ function buildCard(file) {
     thumb,
     loupe,
     loupeToggle,
+    thumbPreviewBtn,
     loupeEnabled: false,
     ocrData: { text: "", lines: [] },
     ocrText: "",
@@ -1363,6 +1417,21 @@ function buildCard(file) {
     saveLearnedOverrides(item.learnKey, item.fields);
   });
 
+  if (thumbPreviewBtn) {
+    thumbPreviewBtn.addEventListener("click", (ev) => {
+      ev.preventDefault();
+      ev.stopPropagation();
+      openReceiptPreview(item);
+    });
+  }
+  if (IS_TOUCH_DEVICE && thumbWrap) {
+    thumbWrap.addEventListener("click", (ev) => {
+      const target = ev.target;
+      if (target instanceof HTMLElement && target.closest(".thumb-preview-btn")) return;
+      openReceiptPreview(item);
+    });
+  }
+
   setupThumbLoupe(item);
   updateCardLanguage(item);
   return item;
@@ -1374,6 +1443,13 @@ function setupThumbLoupe(item) {
   const loupe = item.loupe;
   const toggle = item.loupeToggle;
   if (!wrap || !img || !loupe || !toggle) return;
+
+  if (IS_TOUCH_DEVICE) {
+    wrap.classList.add("touch-preview");
+    toggle.hidden = true;
+    setLoupeEnabled(item, false);
+    return;
+  }
 
   let rafId = 0;
   let pendingPointer = null;
@@ -1415,9 +1491,13 @@ function setupThumbLoupe(item) {
     const half = lensSize / 2;
     const pointerX = pendingPointer.clientX - wrapRect.left;
     const pointerY = pendingPointer.clientY - wrapRect.top;
-    const pad = 4;
-    const left = Math.max(pad, Math.min(wrapRect.width - lensSize - pad, pointerX - half));
-    const top = Math.max(pad, Math.min(wrapRect.height - lensSize - pad, pointerY - half));
+    const bleed = 18;
+    const minLeft = -bleed;
+    const maxLeft = wrapRect.width - lensSize + bleed;
+    const minTop = -bleed;
+    const maxTop = wrapRect.height - lensSize + bleed;
+    const left = Math.max(minLeft, Math.min(maxLeft, pointerX - half));
+    const top = Math.max(minTop, Math.min(maxTop, pointerY - half));
     const zoom = 2.6;
 
     loupe.style.left = `${left}px`;
@@ -1697,6 +1777,7 @@ function updateCardLanguage(item) {
   const serviceLabel = item.element.querySelector(".service-label");
   const filenameLabel = item.element.querySelector(".filename-label");
   const thumbTip = item.element.querySelector(".thumb-tip");
+  const thumbPreviewBtn = item.element.querySelector(".thumb-preview-btn");
   if (includeText) includeText.textContent = tr.include;
   if (dateLabel) dateLabel.textContent = tr.date;
   if (amountLabel) amountLabel.textContent = tr.amount;
@@ -1705,7 +1786,12 @@ function updateCardLanguage(item) {
     : tr.itemCount;
   if (serviceLabel) serviceLabel.textContent = tr.service;
   if (filenameLabel) filenameLabel.textContent = tr.filename;
-  if (thumbTip) thumbTip.textContent = tr.thumbTip;
+  if (thumbTip) thumbTip.textContent = IS_TOUCH_DEVICE ? tr.thumbTipTouch || tr.thumbTip : tr.thumbTip;
+  if (thumbPreviewBtn) {
+    thumbPreviewBtn.textContent = tr.thumbPreviewOpen;
+    thumbPreviewBtn.setAttribute("aria-label", tr.thumbPreviewOpen);
+    thumbPreviewBtn.title = tr.thumbPreviewOpen;
+  }
   updateLoupeToggleLabel(item);
   item.dateInput.placeholder = "YYYYMMDD";
   item.amountInput.placeholder = currentLang === "en" ? "¥450 / $9.99" : "¥450";

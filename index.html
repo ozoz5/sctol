@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8836711435832387" crossorigin="anonymous"></script>
+        <link rel="icon" type="image/svg+xml" href="./sctol-logo.svg?v=20260213au" />
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8836711435832387" crossorigin="anonymous"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LEQXDJXK6L"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -12,7 +13,7 @@
       gtag("config", "G-LEQXDJXK6L");
     </script>
     <title>メールで送られてきたAppleの領収書スクショに自動でタイトルをつけるツール</title>
-    <link rel="stylesheet" href="./styles.css?v=20260213ap" />
+    <link rel="stylesheet" href="./styles.css?v=20260213av" />
   </head>
   <body>
     <div class="bg-glow bg-glow-a"></div>
@@ -192,7 +193,7 @@
             </a>
             <a id="guideComparisonLink" class="guide-link-card" href="./guide-comparison.html">
               <span id="guideComparisonTag" class="guide-tag">比較</span>
-              <strong id="guideComparisonTitle">おい…他に方法はなかったのか？</strong>
+              <strong id="guideComparisonTitle">Appleの領収書はPDFでダウンロードできない？現実的な整理方法</strong>
               <small id="guideComparisonSub">みんな同じところで詰まってる。</small>
             </a>
             <a id="guideHowtoLink" class="guide-link-card" href="./guide-howto.html">
@@ -209,6 +210,15 @@
       </footer>
     </main>
 
+    <div id="receiptPreviewModal" class="receipt-modal" hidden aria-hidden="true">
+      <button class="receipt-modal-backdrop" type="button" data-close="receipt-preview-modal" aria-label="close preview"></button>
+      <div class="receipt-modal-panel" role="dialog" aria-modal="true" aria-label="receipt preview">
+        <button id="receiptPreviewCloseBtn" class="receipt-modal-close" type="button" aria-label="close preview">&times;</button>
+        <img id="receiptPreviewImg" src="" alt="receipt preview" />
+        <p id="receiptPreviewCaption" class="receipt-modal-caption"></p>
+      </div>
+    </div>
+
     <div id="sampleModal" class="sample-modal" hidden aria-hidden="true">
       <button class="sample-modal-backdrop" type="button" data-close="sample-modal" aria-label="close preview"></button>
       <div class="sample-modal-panel" role="dialog" aria-modal="true" aria-label="sample preview">
@@ -222,6 +232,7 @@
         <div class="thumb-wrap">
           <img class="thumb" alt="preview" />
           <button class="loupe-toggle" type="button" aria-pressed="false">虫眼鏡: OFF</button>
+          <button class="thumb-preview-btn" type="button">拡大確認</button>
           <div class="thumb-loupe" aria-hidden="true"></div>
         </div>
         <div class="card-body">
@@ -266,9 +277,9 @@
     <script defer src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
-    <script defer src="./service-catalog.js?v=20260213at"></script>
-    <script defer src="./updates.js?v=20260213at"></script>
-    <script defer src="./main.js?v=20260213at"></script>
+    <script defer src="./service-catalog.js?v=20260213au"></script>
+    <script defer src="./updates.js?v=20260213au"></script>
+    <script defer src="./main.js?v=20260213av"></script>
 
   </body>
 </html>
