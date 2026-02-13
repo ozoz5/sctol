@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Explainer | SCTOL (Auto-Rename Tool for Apple Receipt Screenshots)</title>
+    <meta
+      name="description"
+      content="Explainer page for SCTOL, an auto-rename tool for Apple receipt screenshots. Why it exists, how it works, where it fails, and what to verify."
+    />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="Explainer | SCTOL (Auto-Rename Tool for Apple Receipt Screenshots)" />
+    <meta
+      property="og:description"
+      content="Explainer page for SCTOL, an auto-rename tool for Apple receipt screenshots. Why it exists, how it works, where it fails, and what to verify."
+    />
+    <meta name="twitter:card" content="summary" />
+    <link rel="canonical" href="./guide-explainer-en.html" />
+    <link rel="stylesheet" href="./styles.css?v=20260213ac" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "inLanguage": "en",
+        "headline": "What This Tool Is Actually Doing",
+        "description": "Explainer page for SCTOL, an auto-rename tool for Apple receipt screenshots.",
+        "dateModified": "2026-02-12",
+        "author": { "@type": "Organization", "name": "sctol" },
+        "publisher": { "@type": "Organization", "name": "sctol" }
+      }
+    </script>
+  </head>
+  <body>
+    <main class="app guide-page">
+      <header class="hero">
+        <p class="eyebrow">Guide / Explainer</p>
+        <h1>What This Tool Is Actually Doing</h1>
+        <p class="lead">Last updated: February 12, 2026</p>
+        <p class="guide-meta">Estimated reading time: 3 minutes</p>
+      </header>
+
+      <nav class="guide-toc" aria-label="Table of contents">
+        <p class="guide-toc-title">On this page</p>
+        <ol>
+          <li><a href="#manual-rename">You’re not still manually renaming Apple receipt screenshots, are you?</a></li>
+          <li><a href="#why-sctol">That’s why I built “SCTOL”</a></li>
+          <li><a href="#not-perfect">It’s not perfect (honestly)</a></li>
+          <li><a href="#disclaimer">Quick disclaimer</a></li>
+        </ol>
+      </nav>
+
+      <article class="notice guide-content guide-article">
+        <section class="guide-block" id="manual-rename">
+          <h2>You’re not still manually renaming Apple receipt screenshots, are you?</h2>
+          <p>You’re not still manually renaming Apple receipt screenshots, are you?</p>
+          <p>Yeah, I was.</p>
+          <p>I’d take a screenshot, read the date and amount with my eyes, and peck the filename in manually.</p>
+          <p>I’m one of those Japanese people who did that tax-season grind over and over, and got fed up enough to build this thing.</p>
+          <p>Normally, you just paste images and move on. Who cares about filenames, right?</p>
+          <p>Then later, your receipts go missing, and you waste time you could’ve spent on something better.</p>
+        </section>
+
+        <section class="guide-block" id="why-sctol">
+          <h2>That’s why I built “SCTOL”</h2>
+          <p>Then one day, even this idiot realized something: I wanted filenames to change automatically. That’s all.</p>
+          <p>So I built this thing solo. That’s “SCTOL.”</p>
+          <p>If you throw screenshot images (PDFs kind of work too) onto the screen, it reads date, amount, and service name automatically, then generates save-ready filenames. Images are processed in your browser only, so they don’t go anywhere.</p>
+          <p>OCR reads text -> picks date, amount, and service name -> generates filename. Then you tweak a few fields on the right and you’re done. Ten minutes of manual typing becomes three seconds.</p>
+        </section>
+
+        <section class="guide-block" id="not-perfect">
+          <h2>It’s not perfect (honestly)</h2>
+          <p>It’s not perfect. Honestly.</p>
+          <p>If it’s an Apple standard-format screenshot, text isn’t crushed, and the whole thing is visible, it usually reads fine. Recompressed blurry images, cropped captures, and non-Apple formats are rough. You’ll also occasionally get date misreads, amount digit slips, or service-name mix-ups. Don’t overtrust OCR. Always verify against the original. Built by an idiot, not a genius.</p>
+          <p>If you’re one of the wise people who knows a better way, I’d be grateful if you send me a note through the contact page.</p>
+        </section>
+
+        <section class="guide-block" id="disclaimer">
+          <h2>Quick disclaimer</h2>
+          <p>Quick disclaimer too.</p>
+          <p>This tool has nothing to do with Apple. It is not provided, certified, or guaranteed by Apple, and extraction accuracy is not guaranteed. Always make final decisions against the original.</p>
+          <p>And yes, I’d love people at Apple to use it too.</p>
+        </section>
+
+        <p class="legal-links">
+          <a href="./index.html">Back to Home</a>
+          <a href="./guide-comparison-en.html">Go to Comparison</a>
+          <a href="./guide-howto-en.html">Go to How-To</a>
+        </p>
+      </article>
+    </main>
+  </body>
+</html>

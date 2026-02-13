@@ -3,52 +3,93 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>解説 | Apple領収書スクショ整理ツール</title>
+    <title>解説 | スクトル（Apple領収書スクショ自動リネームツール）</title>
     <meta
       name="description"
-      content="Apple領収書スクリーンショット整理ツールの仕組み、得意/苦手、運用時の確認ポイントを解説します。"
+      content="Apple領収書スクショ自動リネームツール「スクトル」の解説ページ。手打ちリネームの課題、仕組み、精度の限界、免責事項をまとめています。"
     />
-    <link rel="stylesheet" href="./styles.css?v=20260212zz" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="ja_JP" />
+    <meta property="og:title" content="解説 | スクトル（Apple領収書スクショ自動リネームツール）" />
+    <meta
+      property="og:description"
+      content="Apple領収書スクショ自動リネームツール「スクトル」の解説ページ。手打ちリネームの課題、仕組み、精度の限界、免責事項をまとめています。"
+    />
+    <meta name="twitter:card" content="summary" />
+    <link rel="canonical" href="./guide-explainer.html" />
+    <link rel="stylesheet" href="./styles.css?v=20260213ac" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "inLanguage": "ja",
+        "headline": "このツールで何が起きているか",
+        "description": "Apple領収書スクショ自動リネームツール「スクトル」の解説ページ。",
+        "dateModified": "2026-02-12",
+        "author": { "@type": "Organization", "name": "sctol" },
+        "publisher": { "@type": "Organization", "name": "sctol" }
+      }
+    </script>
   </head>
   <body>
-    <main class="app">
+    <main class="app guide-page">
       <header class="hero">
         <p class="eyebrow">Guide / Explainer</p>
         <h1>このツールで何が起きているか</h1>
         <p class="lead">最終更新日: 2026年2月12日</p>
+        <p class="guide-meta">読了目安: 3分</p>
       </header>
 
-      <section class="notice guide-content">
-        <h2>まだ手打ちでリネームしてる？</h2>
-        <p>Appleの領収書スクショ、まさか手打ちでタイトルリネームしてないですよね？</p>
-        <p>もちろん私はしてます。</p>
-        <p>スクショ撮って、日付と金額を目で読んで、ファイル名をポチポチ打ち直す。</p>
-        <p>確定申告のたびにあの苦行をやってた側の日本人が、いい加減キレて作ったツールです。</p>
-        <p>だって普段はタイトルなんか無視して画像だけ貼りゃいいんですよ。こまけぇことはいいんだよマインド。</p>
-        <p>その結果、後で領収書の迷子探しになり、運命の出会いがあったかもしれない時間を浪費していました。</p>
+      <nav class="guide-toc" aria-label="このページの目次">
+        <p class="guide-toc-title">目次</p>
+        <ol>
+          <li><a href="#manual-rename">まだ手打ちでリネームしてる？</a></li>
+          <li><a href="#why-sctol">だから作った「スクトル」</a></li>
+          <li><a href="#not-perfect">万能じゃないです（正直）</a></li>
+          <li><a href="#disclaimer">念のための免責</a></li>
+        </ol>
+      </nav>
 
-        <h2>だから作った「スクトル」</h2>
-        <p>しかしある日、そんなバカなりに気づいたんです。タイトルだけ自動で変えてほしいな、できたらいいなって！</p>
-        <p>そして一人孤独に作ったのがこの「スクトル」です。</p>
-        <p>スクショ画像（PDFも一応いけます）を画面に乱暴に放り込めば、日付・金額・サービス名を自動で読み取って、保存用のファイル名をそのまま作ります。画像はブラウザの中だけで処理するので、どこにも送られません。</p>
-        <p>OCRで文字を読む → 日付・金額・サービス名を拾う → ファイル名を生成。あとは右の編集欄でちょっと直せば完了。手打ちの10分が3秒になります。</p>
+      <article class="notice guide-content guide-article">
+        <section class="guide-block" id="manual-rename">
+          <h2>まだ手打ちでリネームしてる？</h2>
+          <p>Appleの領収書スクショ、まさか手打ちでタイトルリネームしてないですよね？</p>
+          <p>もちろん私はしてます。</p>
+          <p>スクショ撮って、日付と金額を目で読んで、ファイル名をポチポチ打ち直す。</p>
+          <p>確定申告のたびにあの苦行をやってた側の日本人が、いい加減キレて作ったツールです。</p>
+          <p>だって普段はタイトルなんか無視して画像だけ貼りゃいいんですよ。こまけぇことはいいんだよマインド。</p>
+          <p>その結果、後で領収書の迷子探しになり、運命の出会いがあったかもしれない時間を浪費していました。</p>
+        </section>
 
-        <h2>万能じゃないです（正直）</h2>
-        <p>万能じゃないです、正直に言います</p>
-        <p>Appleの定型フォーマットで、文字が潰れてなくて、全体が写ってるスクショならほぼ読めます。再圧縮でボケた画像、途中で切れてるやつ、Apple以外のフォーマットは厳しい。あと日付の読み間違い、金額の桁ズレ、サービス名の取り違えもたまに起きます。OCRを過信せず、最終確認は原本でお願いします。バカが作ったツールなので。</p>
-        <p>「そんなことしなくてもこういうやり方があるよ」という知恵をお持ちの大賢者の方がおりましたら、お問い合わせ欄から一報いただけると感激です。</p>
+        <section class="guide-block" id="why-sctol">
+          <h2>だから作った「スクトル」</h2>
+          <p>しかしある日、そんなバカなりに気づいたんです。タイトルだけ自動で変えてほしいな、できたらいいなって！</p>
+          <p>そして一人孤独に作ったのがこの「スクトル」です。</p>
+          <p>スクショ画像（PDFも一応いけます）を画面に乱暴に放り込めば、日付・金額・サービス名を自動で読み取って、保存用のファイル名をそのまま作ります。画像はブラウザの中だけで処理するので、どこにも送られません。</p>
+          <p>OCRで文字を読む → 日付・金額・サービス名を拾う → ファイル名を生成。あとは右の編集欄でちょっと直せば完了。手打ちの10分が3秒になります。</p>
+        </section>
 
-        <h2>念のための免責</h2>
-        <p>念のために免責も！</p>
-        <p>本ツールはApple社とは一切関係ありません。提供・認定・保証を受けたものではなく、抽出結果の正確性は保証できません。最終判断は必ず原本で行ってください。</p>
-        <p>※そしてApple社関係の方にも使っていただきたいです！</p>
+        <section class="guide-block" id="not-perfect">
+          <h2>万能じゃないです（正直）</h2>
+          <p>万能じゃないです、正直に言います</p>
+          <p>Appleの定型フォーマットで、文字が潰れてなくて、全体が写ってるスクショならほぼ読めます。再圧縮でボケた画像、途中で切れてるやつ、Apple以外のフォーマットは厳しい。あと日付の読み間違い、金額の桁ズレ、サービス名の取り違えもたまに起きます。OCRを過信せず、最終確認は原本でお願いします。バカが作ったツールなので。</p>
+          <p>「そんなことしなくてもこういうやり方があるよ」という知恵をお持ちの大賢者の方がおりましたら、お問い合わせ欄から一報いただけると感激です。</p>
+        </section>
+
+        <section class="guide-block" id="disclaimer">
+          <h2>念のための免責</h2>
+          <p>念のために免責も！</p>
+          <p>本ツールはApple社とは一切関係ありません。提供・認定・保証を受けたものではなく、抽出結果の正確性は保証できません。最終判断は必ず原本で行ってください。</p>
+          <p>※そしてApple社関係の方にも使っていただきたいです！</p>
+        </section>
 
         <p class="legal-links">
           <a href="./index.html">トップへ戻る</a>
           <a href="./guide-comparison.html">比較ガイドへ</a>
           <a href="./guide-howto.html">使い方ガイドへ</a>
         </p>
-      </section>
+      </article>
     </main>
   </body>
 </html>

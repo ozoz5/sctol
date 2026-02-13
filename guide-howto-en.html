@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How-To | SCTOL (Apple Receipt Screenshot Workflow)</title>
+    <meta
+      name="description"
+      content="How-to page for SCTOL: setup, daily workflow, pre-save checks, CSV export, and what to do when OCR fails."
+    />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="How-To | SCTOL (Apple Receipt Screenshot Workflow)" />
+    <meta
+      property="og:description"
+      content="How-to page for SCTOL: setup, daily workflow, pre-save checks, CSV export, and what to do when OCR fails."
+    />
+    <meta name="twitter:card" content="summary" />
+    <link rel="canonical" href="./guide-howto-en.html" />
+    <link rel="stylesheet" href="./styles.css?v=20260213ac" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "inLanguage": "en",
+        "headline": "How to Use It",
+        "description": "How-to page for SCTOL.",
+        "dateModified": "2026-02-12",
+        "author": { "@type": "Organization", "name": "sctol" },
+        "publisher": { "@type": "Organization", "name": "sctol" }
+      }
+    </script>
+  </head>
+  <body>
+    <main class="app guide-page">
+      <header class="hero">
+        <p class="eyebrow">Guide / How-To</p>
+        <h1>How to Use It</h1>
+        <p class="lead">Last updated: February 12, 2026</p>
+        <p class="guide-meta">Estimated reading time: 2 minutes</p>
+      </header>
+
+      <nav class="guide-toc" aria-label="Table of contents">
+        <p class="guide-toc-title">On this page</p>
+        <ol>
+          <li><a href="#howto-main">How to use it (if this even counts as a how-to)</a></li>
+          <li><a href="#howto-start">First thing to do</a></li>
+          <li><a href="#howto-routine">Then this is all you do every time</a></li>
+          <li><a href="#howto-check">Before saving, only check this</a></li>
+          <li><a href="#howto-csv">There’s CSV export too</a></li>
+          <li><a href="#howto-trouble">If OCR messes up</a></li>
+          <li><a href="#howto-non-apple">About non-Apple images</a></li>
+        </ol>
+      </nav>
+
+      <article class="notice guide-content guide-article">
+        <section class="guide-block" id="howto-main">
+          <h2>How to use it (if this even counts as a how-to)</h2>
+        </section>
+
+        <section class="guide-block" id="howto-start">
+          <h2>First thing to do</h2>
+          <p>Turn on Apple Receipt Preset. If you want ZIP output grouped by month, turn that on too. Drop in one test file and check whether the filename format feels right to you. That’s it.</p>
+        </section>
+
+        <section class="guide-block" id="howto-routine">
+          <h2>Then this is all you do every time</h2>
+          <p>Dump in screenshots or PDFs in bulk -> eyeball date, amount, and service name -> fix anything wrong -> save. Single download or ZIP, whichever you want. Dropping 20-30 files at once is usually fine. Before tax filing, just nuke your backlog in one go.</p>
+        </section>
+
+        <section class="guide-block" id="howto-check">
+          <h2>Before saving, only check this</h2>
+          <p>Is the date correct? Is the amount correct? Is the service name what you intended? Any full-width/half-width character weirdness? Just those four. Done in 30 seconds.</p>
+        </section>
+
+        <section class="guide-block" id="howto-csv">
+          <h2>There’s CSV export too</h2>
+          <p>You can also export the detected date, amount, and service name as CSV. Useful if you want to feed it into accounting software.</p>
+        </section>
+
+        <section class="guide-block" id="howto-trouble">
+          <h2>If OCR messes up</h2>
+          <p>Check whether the image is over-cropped or text is crushed. If needed, hit Reanalyze. If it still fails, edit manually. Do not expect perfection from OCR. It is, like us, an imperfect being.</p>
+        </section>
+
+        <section class="guide-block" id="howto-non-apple">
+          <h2>About non-Apple images</h2>
+          <p>Sometimes it reads them. Don’t expect too much. Treat it as “nice if it works,” and always verify against the original. If I feel like it later, I may add support for non-Apple email receipt titles too.</p>
+        </section>
+
+        <p class="legal-links">
+          <a href="./index.html">Back to Home</a>
+          <a href="./guide-explainer-en.html">Go to Explainer</a>
+          <a href="./guide-comparison-en.html">Go to Comparison</a>
+        </p>
+      </article>
+    </main>
+  </body>
+</html>

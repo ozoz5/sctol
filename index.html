@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Appleの領収書のスクショにタイトルを自動でつけるサイト</title>
-    <link rel="stylesheet" href="./styles.css?v=20260212zz" />
+    <link rel="stylesheet" href="./styles.css?v=20260213ac" />
   </head>
   <body>
     <div class="bg-glow bg-glow-a"></div>
@@ -12,7 +12,7 @@
 
     <main class="app">
       <div class="brand-bar">
-        <img src="./sctol-logo.svg?v=20260212zz" alt="SCTOL logo" class="brand-logo" />
+        <img src="./sctol-logo.svg?v=20260213ac" alt="SCTOL logo" class="brand-logo" />
         <div class="brand-text">
           <p class="brand-name">SCTOL</p>
           <p class="brand-tag">Screenshot Control Tool</p>
@@ -71,24 +71,23 @@
         <ul id="updatesList"></ul>
       </section>
 
-      <section class="guides" aria-label="活用ガイド">
-        <h2>活用ガイド</h2>
-        <p class="guides-lead">ブログ機能なしで使える、運用向けの固定ガイドです。</p>
+      <section id="guidesSection" class="guides" aria-label="活用ガイド">
+        <h2 id="guidesTitle">ゆるい活用ガイド</h2>
         <div class="guide-links">
-          <a class="guide-link-card" href="./guide-explainer.html">
-            <span class="guide-tag">解説</span>
-            <strong>このツールで何が起きているか</strong>
-            <small>OCR処理の流れ、得意/苦手、確認ポイント</small>
+          <a id="guideExplainerLink" class="guide-link-card" href="./guide-explainer.html">
+            <span id="guideExplainerTag" class="guide-tag">解説</span>
+            <strong id="guideExplainerTitle">Appleの領収書スクショ、まさか手打ちでタイトルリネームしてないですよね？</strong>
+            <small id="guideExplainerSub">もちろん私はしてます。</small>
           </a>
-          <a class="guide-link-card" href="./guide-comparison.html">
-            <span class="guide-tag">比較</span>
-            <strong>手作業・他手段との比較</strong>
-            <small>どのケースでこのツールを使うべきか</small>
+          <a id="guideComparisonLink" class="guide-link-card" href="./guide-comparison.html">
+            <span id="guideComparisonTag" class="guide-tag">比較</span>
+            <strong id="guideComparisonTitle">おい…他に方法はなかったのか？</strong>
+            <small id="guideComparisonSub">みんな同じところで詰まってる。</small>
           </a>
-          <a class="guide-link-card" href="./guide-howto.html">
-            <span class="guide-tag">使い方</span>
-            <strong>初回から運用までの手順</strong>
-            <small>最短の実務フローと注意点</small>
+          <a id="guideHowtoLink" class="guide-link-card" href="./guide-howto.html">
+            <span id="guideHowtoTag" class="guide-tag">使い方</span>
+            <strong id="guideHowtoTitle">使い方（というほどのものでもない）</strong>
+            <small id="guideHowtoSub">以上。</small>
           </a>
         </div>
       </section>
@@ -151,9 +150,9 @@
     <script defer src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
-    <script defer src="./service-catalog.js?v=20260212zz"></script>
-    <script defer src="./updates.js?v=20260212zz"></script>
-    <script defer src="./main.js?v=20260212zz"></script>
+    <script defer src="./service-catalog.js?v=20260213ac"></script>
+    <script defer src="./updates.js?v=20260213ac"></script>
+    <script defer src="./main.js?v=20260213ac"></script>
 
   </body>
 </html>

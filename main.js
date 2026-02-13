@@ -28,6 +28,20 @@ const termsLink = document.getElementById("termsLink");
 const updatesSection = document.getElementById("updatesSection");
 const updatesTitle = document.getElementById("updatesTitle");
 const updatesList = document.getElementById("updatesList");
+const guidesSection = document.getElementById("guidesSection");
+const guidesTitle = document.getElementById("guidesTitle");
+const guideExplainerLink = document.getElementById("guideExplainerLink");
+const guideExplainerTag = document.getElementById("guideExplainerTag");
+const guideExplainerTitle = document.getElementById("guideExplainerTitle");
+const guideExplainerSub = document.getElementById("guideExplainerSub");
+const guideComparisonLink = document.getElementById("guideComparisonLink");
+const guideComparisonTag = document.getElementById("guideComparisonTag");
+const guideComparisonTitle = document.getElementById("guideComparisonTitle");
+const guideComparisonSub = document.getElementById("guideComparisonSub");
+const guideHowtoLink = document.getElementById("guideHowtoLink");
+const guideHowtoTag = document.getElementById("guideHowtoTag");
+const guideHowtoTitle = document.getElementById("guideHowtoTitle");
+const guideHowtoSub = document.getElementById("guideHowtoSub");
 
 const batchItems = [];
 let updatesData = [];
@@ -66,6 +80,17 @@ const I18N = {
     terms: "利用規約",
     updatesTitle: "お知らせ",
     updatesAria: "お知らせ",
+    guidesTitle: "ゆるい活用ガイド",
+    guidesAria: "活用ガイド",
+    guideExplainerTag: "解説",
+    guideExplainerTitle: "Appleの領収書スクショ、まさか手打ちでタイトルリネームしてないですよね？",
+    guideExplainerSub: "もちろん私はしてます。",
+    guideComparisonTag: "比較",
+    guideComparisonTitle: "おい…他に方法はなかったのか？",
+    guideComparisonSub: "みんな同じところで詰まってる。",
+    guideHowtoTag: "使い方",
+    guideHowtoTitle: "使い方（というほどのものでもない）",
+    guideHowtoSub: "以上。",
     statusReady: "準備完了",
     statusPresetOn: "Apple領収書プリセット: ON",
     statusPresetOff: "Apple領収書プリセット: OFF",
@@ -156,6 +181,17 @@ const I18N = {
     terms: "Terms",
     updatesTitle: "Updates",
     updatesAria: "Updates",
+    guidesTitle: "A Chill Practical Guide",
+    guidesAria: "Practical guides",
+    guideExplainerTag: "Explainer",
+    guideExplainerTitle: "You’re not still manually renaming Apple receipt screenshots, are you?",
+    guideExplainerSub: "Yeah, I was.",
+    guideComparisonTag: "Comparison",
+    guideComparisonTitle: "Wait... was there really no better way?",
+    guideComparisonSub: "Turns out everyone gets stuck in the same place.",
+    guideHowtoTag: "How-To",
+    guideHowtoTitle: "How to use it (if this even counts as a how-to)",
+    guideHowtoSub: "That’s it.",
     statusReady: "Ready",
     statusPresetOn: "Apple receipt preset: ON",
     statusPresetOff: "Apple receipt preset: OFF",
@@ -249,7 +285,7 @@ const DEFAULT_SERVICE_CATALOG = {
 const SERVICE_CATALOG = getServiceCatalog();
 const LEARN_STORE_KEY = "apple_receipt_renamer_learning_v3";
 const ENABLE_LEARN_OVERRIDES = false;
-const BUILD_ID = "20260212zz";
+const BUILD_ID = "20260213ac";
 const APPLE_SINGLE_DEBUG_TARGET = "";
 const PDFJS_WORKER_URL = "https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js";
 const MULTIPLICITY_ONLY_MODE = true;
@@ -424,18 +460,35 @@ function applyLanguage() {
   noticeLead.textContent = tr.noticeLead;
   if (updatesTitle) updatesTitle.textContent = tr.updatesTitle;
   if (updatesSection) updatesSection.setAttribute("aria-label", tr.updatesAria);
+  if (guidesTitle) guidesTitle.textContent = tr.guidesTitle;
+  if (guidesSection) guidesSection.setAttribute("aria-label", tr.guidesAria);
   officialNote.textContent = tr.official;
   contactLink.textContent = tr.contact;
   privacyLink.textContent = tr.privacy;
   termsLink.textContent = tr.terms;
+  if (guideExplainerTag) guideExplainerTag.textContent = tr.guideExplainerTag;
+  if (guideExplainerTitle) guideExplainerTitle.textContent = tr.guideExplainerTitle;
+  if (guideExplainerSub) guideExplainerSub.textContent = tr.guideExplainerSub;
+  if (guideComparisonTag) guideComparisonTag.textContent = tr.guideComparisonTag;
+  if (guideComparisonTitle) guideComparisonTitle.textContent = tr.guideComparisonTitle;
+  if (guideComparisonSub) guideComparisonSub.textContent = tr.guideComparisonSub;
+  if (guideHowtoTag) guideHowtoTag.textContent = tr.guideHowtoTag;
+  if (guideHowtoTitle) guideHowtoTitle.textContent = tr.guideHowtoTitle;
+  if (guideHowtoSub) guideHowtoSub.textContent = tr.guideHowtoSub;
   if (currentLang === "en") {
     contactLink.href = "./contact-en.html";
     privacyLink.href = "./privacy-en.html";
     termsLink.href = "./terms-en.html";
+    if (guideExplainerLink) guideExplainerLink.href = "./guide-explainer-en.html";
+    if (guideComparisonLink) guideComparisonLink.href = "./guide-comparison-en.html";
+    if (guideHowtoLink) guideHowtoLink.href = "./guide-howto-en.html";
   } else {
     contactLink.href = "./contact.html";
     privacyLink.href = "./privacy.html";
     termsLink.href = "./terms.html";
+    if (guideExplainerLink) guideExplainerLink.href = "./guide-explainer.html";
+    if (guideComparisonLink) guideComparisonLink.href = "./guide-comparison.html";
+    if (guideHowtoLink) guideHowtoLink.href = "./guide-howto.html";
   }
   noticeList.innerHTML = "";
   for (const item of tr.noticeItems) {

@@ -3,65 +3,106 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>使い方 | Apple領収書スクショ整理ツール</title>
+    <title>使い方 | スクトル（Apple領収書スクショ整理の手順）</title>
     <meta
       name="description"
-      content="Apple領収書スクリーンショット整理ツールの使い方。初回準備、日次運用、保存前チェック、トラブル時の見直しポイントをまとめています。"
+      content="Apple領収書スクショ整理ツール「スクトル」の使い方ページ。初回設定、日常運用、保存前チェック、読み取り失敗時の対処をまとめています。"
     />
-    <link rel="stylesheet" href="./styles.css?v=20260212zz" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="ja_JP" />
+    <meta property="og:title" content="使い方 | スクトル（Apple領収書スクショ整理の手順）" />
+    <meta
+      property="og:description"
+      content="Apple領収書スクショ整理ツール「スクトル」の使い方ページ。初回設定、日常運用、保存前チェック、読み取り失敗時の対処をまとめています。"
+    />
+    <meta name="twitter:card" content="summary" />
+    <link rel="canonical" href="./guide-howto.html" />
+    <link rel="stylesheet" href="./styles.css?v=20260213ac" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "inLanguage": "ja",
+        "name": "使い方について",
+        "description": "Apple領収書スクショ整理ツール「スクトル」の使い方。",
+        "dateModified": "2026-02-12",
+        "author": { "@type": "Organization", "name": "sctol" },
+        "publisher": { "@type": "Organization", "name": "sctol" }
+      }
+    </script>
   </head>
   <body>
-    <main class="app">
+    <main class="app guide-page">
       <header class="hero">
         <p class="eyebrow">Guide / How-to</p>
-        <h1>初回から運用までの手順</h1>
+        <h1>使い方について</h1>
         <p class="lead">最終更新日: 2026年2月12日</p>
+        <p class="guide-meta">読了目安: 2分</p>
       </header>
 
-      <section class="notice guide-content">
-        <h2>1. 初回準備</h2>
+      <nav class="guide-toc" aria-label="このページの目次">
+        <p class="guide-toc-title">目次</p>
         <ol>
-          <li>トップページで Apple領収書プリセットを ON にする</li>
-          <li>必要なら ZIPの月別フォルダ分けを ON にする</li>
-          <li>サンプル画像1枚で命名フォーマットを確認する</li>
+          <li><a href="#howto-main">使い方（というほどのものでもない）</a></li>
+          <li><a href="#howto-start">最初にやること</a></li>
+          <li><a href="#howto-routine">あとはもう毎回これだけ</a></li>
+          <li><a href="#howto-check">保存する前にここだけ見て</a></li>
+          <li><a href="#howto-csv">CSV出力もあるよ</a></li>
+          <li><a href="#howto-trouble">うまく読めないとき</a></li>
+          <li><a href="#howto-non-apple">Apple以外の画像について</a></li>
         </ol>
+      </nav>
 
-        <h2>2. 日次運用フロー</h2>
-        <ol>
-          <li>スクリーンショットまたはPDFをまとめてドロップ</li>
-          <li>各カードの「日付」「合計」「サービス名」を確認</li>
-          <li>必要箇所だけ手修正して保存</li>
-          <li>単体保存またはZIP保存で出力</li>
-        </ol>
+      <article class="notice guide-content guide-article">
+        <section class="guide-block" id="howto-main">
+          <h2>使い方（というほどのものでもない）</h2>
+        </section>
 
-        <h2>3. 保存前チェックリスト</h2>
-        <ul>
-          <li>日付が請求書ヘッダの日付と一致しているか</li>
-          <li>合計金額が最下段の合計と一致しているか</li>
-          <li>サービス名が目的のアプリ名になっているか</li>
-          <li>ファイル名に全角/半角崩れがないか</li>
-        </ul>
+        <section class="guide-block" id="howto-start">
+          <h2>最初にやること</h2>
+          <p>
+            Apple領収書プリセットをONにする。ZIPで月別に分けたいならそれもONにする。試しに1枚突っ込んでみて、ファイル名のフォーマットが好みか確認する。以上。
+          </p>
+        </section>
 
-        <h2>4. うまく読めないとき</h2>
-        <ul>
-          <li>画像の余白を詰めすぎていないか確認する</li>
-          <li>文字が潰れている場合は原本サイズに近い画像で再試行する</li>
-          <li>再解析ボタンでOCRを取り直す</li>
-          <li>最終的に手修正で確定する</li>
-        </ul>
+        <section class="guide-block" id="howto-routine">
+          <h2>あとはもう毎回これだけ</h2>
+          <p>
+            スクショかPDFをまとめて放り込む → 日付・金額・サービス名を目で見る → 違ってたら直す → 保存。単体でもZIPでも好きなほうで。20〜30枚くらいならまとめてぶっ込んでも大丈夫です。確定申告前に溜め込んだ分を一気にやっつけてください。
+          </p>
+        </section>
 
-        <h2>5. 非Apple画像の扱い</h2>
-        <p>
-          非Apple請求書の画像でも読み取れる場合はありますが、精度は高くありません。
-          実務利用する場合は原本照合を前提にし、無理に自動化しない運用を推奨します。
-        </p>
+        <section class="guide-block" id="howto-check">
+          <h2>保存する前にここだけ見て</h2>
+          <p>日付は合ってるか。金額は合ってるか。サービス名は意図通りか。全角半角が崩れてないか。4つだけ。30秒で終わる。</p>
+        </section>
+
+        <section class="guide-block" id="howto-csv">
+          <h2>CSV出力もあるよ</h2>
+          <p>読み取った日付・金額・サービス名をCSVでも吐けます。会計ソフトに流し込みたい人向け。</p>
+        </section>
+
+        <section class="guide-block" id="howto-trouble">
+          <h2>うまく読めないとき</h2>
+          <p>
+            画像を詰めすぎてないか、文字が潰れてないか確認。だめなら再解析ボタンを押す。それでもだめなら手で直す。OCRに完璧を求めてはいけない。彼もまた不完全な存在です。
+          </p>
+        </section>
+
+        <section class="guide-block" id="howto-non-apple">
+          <h2>Apple以外の画像について</h2>
+          <p>
+            読めることもある。でも期待しないでください。読めたらラッキーくらいの気持ちで、必ず原本と照合してください。今後気が向いたら、Apple以外のメール領収書のタイトルにも対応します。
+          </p>
+        </section>
 
         <p class="legal-links">
           <a href="./index.html">トップへ戻る</a>
           <a href="./guide-explainer.html">解説ガイドへ</a>
           <a href="./guide-comparison.html">比較ガイドへ</a>
         </p>
-      </section>
+      </article>
     </main>
   </body>
 </html>

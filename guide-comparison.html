@@ -3,79 +3,102 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>比較 | Apple領収書スクショ整理ツール</title>
+    <title>比較 | スクトル（手打ち・汎用OCR・専用ツールの違い）</title>
     <meta
       name="description"
-      content="Apple領収書の整理方法を、手作業・汎用OCR・このツールで比較。時間、精度、運用コストの観点で選び方を整理します。"
+      content="Apple領収書スクショ整理の比較ページ。手打ち、汎用OCRサービス、専用ツール（スクトル）の違いと使い分けを実体験ベースで整理しています。"
     />
-    <link rel="stylesheet" href="./styles.css?v=20260212zz" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="ja_JP" />
+    <meta property="og:title" content="比較 | スクトル（手打ち・汎用OCR・専用ツールの違い）" />
+    <meta
+      property="og:description"
+      content="Apple領収書スクショ整理の比較ページ。手打ち、汎用OCRサービス、専用ツール（スクトル）の違いと使い分けを実体験ベースで整理しています。"
+    />
+    <meta name="twitter:card" content="summary" />
+    <link rel="canonical" href="./guide-comparison.html" />
+    <link rel="stylesheet" href="./styles.css?v=20260213ac" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "inLanguage": "ja",
+        "headline": "手作業・他手段との比較",
+        "description": "Apple領収書スクショ整理の比較ページ。",
+        "dateModified": "2026-02-12",
+        "author": { "@type": "Organization", "name": "sctol" },
+        "publisher": { "@type": "Organization", "name": "sctol" }
+      }
+    </script>
   </head>
   <body>
-    <main class="app">
+    <main class="app guide-page">
       <header class="hero">
         <p class="eyebrow">Guide / Comparison</p>
         <h1>手作業・他手段との比較</h1>
         <p class="lead">最終更新日: 2026年2月12日</p>
+        <p class="guide-meta">読了目安: 4分</p>
       </header>
 
-      <section class="notice guide-content">
-        <h2>1. 比較の前提</h2>
-        <p>
-          Apple領収書の整理には、手作業リネーム、汎用OCRサービス、専用命名ツールなど複数の方法があります。
-          ここでは「作業時間」「再現性」「運用コスト」の3点で比較します。
-        </p>
+      <nav class="guide-toc" aria-label="このページの目次">
+        <p class="guide-toc-title">目次</p>
+        <ol>
+          <li><a href="#same-problem">この詰まり、実はみんな同じ</a></li>
+          <li><a href="#need-sctol">だから欲しかった。それがスクトル</a></li>
+          <li><a href="#three-patterns">思い出スクショ整理の3パターン</a></li>
+          <li><a href="#conclusion">ざっくり結論</a></li>
+          <li><a href="#last-word">最後に</a></li>
+        </ol>
+      </nav>
 
-        <h2>2. 手段ごとの比較</h2>
-        <table class="compare-table">
-          <thead>
-            <tr>
-              <th>手段</th>
-              <th>強み</th>
-              <th>弱み</th>
-              <th>向いているケース</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>手作業でファイル名変更</td>
-              <td>誤りに気づきやすい。外部サービス不要。</td>
-              <td>件数が増えると時間がかかる。命名ゆれが出やすい。</td>
-              <td>月数件レベルの少量運用</td>
-            </tr>
-            <tr>
-              <td>汎用OCR + メモアプリ/表計算</td>
-              <td>幅広い書式に対応しやすい。柔軟性が高い。</td>
-              <td>設定や運用が重くなりやすい。命名まで一気通貫しづらい。</td>
-              <td>複数ベンダーの請求書を一括管理</td>
-            </tr>
-            <tr>
-              <td>このツール（Apple領収書向け）</td>
-              <td>命名規則まで最短で到達。修正して即保存しやすい。</td>
-              <td>Apple領収書以外は精度が落ちる。最終確認は必要。</td>
-              <td>Apple領収書の定期運用</td>
-            </tr>
-          </tbody>
-        </table>
+      <article class="notice guide-content guide-article">
+        <section class="guide-block" id="same-problem">
+          <h2>この詰まり、実はみんな同じ</h2>
+          <p>おい…他に方法はなかったのか？</p>
+          <p>そもそもの話、Appleは領収書をPDFでダウンロードさせてくれない。メールでぺろっと送ってくるだけ。</p>
+          <p>だからスクショ撮って自分で管理するしかなくて、こんなことになっている。 そしていずれにせよタイトルは付けないと後で絶対発狂する。</p>
+          <p>で、「2026年なんだからこんなツールもうあるだろ」と思って探したんですが、ない。</p>
+          <p>世の中にあるのは「スクショからテキストを読むツール」と「経費を仕訳する会計ソフト」で、その間の「ファイル名だけサクッと付けたい」に応えるものがぽっかり空いてた。</p>
+          <p>Hazelとか使えばMacで自動化はできるけど、設定が重いしMac専用だし、そこまでやりたいわけじゃない。 Appleのコミュニティでも「領収書のPDFダウンロードってどうやるの？」って質問が何度も出てて、結局「メールのスクショ撮れや！」で終わってる。</p>
+          <p>みんな同じところで詰まってる。</p>
+        </section>
 
-        <h2>3. 判断の目安</h2>
-        <ul>
-          <li>Apple領収書が中心なら、このツールを主軸にする</li>
-          <li>請求元が多様なら、汎用OCRとの併用を検討する</li>
-          <li>金額確定の監査が厳しい場合は、必ず人の最終確認を残す</li>
-        </ul>
+        <section class="guide-block" id="need-sctol">
+          <h2>だから欲しかった。それがスクトル</h2>
+          <p>で、しゃーなしでスクショ撮るとMacの場合タイトルが「スクリーンショット 2026-02-26 19.00.00」とかになっている…知ってるわ！それタイトルじゃなくてお前の思い出だろ！</p>
+          <p>だから欲しかった。それがスクトルです。</p>
+        </section>
 
-        <h2>4. AdSense観点での価値</h2>
-        <p>
-          単にツール画面だけより、比較記事を置くことで「何を解決するサイトか」が明確になります。
-          利用者の判断材料を提供するページは、審査時の説明可能性にも寄与します。
-        </p>
+        <section class="guide-block" id="three-patterns">
+          <h2>思い出スクショ整理の3パターン</h2>
+          <p>で、その思い出スクショの整理方法は正直3パターンしかないです。</p>
+          <h3 id="pattern-manual">① 手打ち（私がやってたやつ）</h3>
+          <p>確実。だけど10枚超えたあたりで心が折れる。あと自分でやってるくせに命名ルールがブレる。「あれ、日付先だっけ金額先だっけ」を毎回やる。</p>
+          <h3 id="pattern-generic-ocr">② 汎用OCRサービスに食わせて表計算で管理</h3>
+          <p>几帳面な人はこれでいける。ただApple領収書のためだけにやるには気が重い。 でも複数ベンダーの請求書をまとめて管理したいならこっちのほうが向いてます。</p>
+          <h3 id="pattern-sctol">③ このツール</h3>
+          <p>Apple領収書に特化してるぶん、放り込んでからファイル名確定までが最短。それだけ。逆にApple以外には弱い。</p>
+        </section>
+
+        <section class="guide-block" id="conclusion">
+          <h2>ざっくり結論</h2>
+          <p>ざっくりまとめると</p>
+          <p>月に数枚なら手打ちで十分。Apple以外の請求書も大量にあるなら汎用OCR。Appleの領収書が定期的に溜まる人はこれ。併用してもいい。</p>
+          <p>しかしどのやり方でも、金額と日付の最終確認は人の目でやってください。OCRを全面信頼して確定申告したガンガン行こうぜ勇者の末路は知りません。</p>
+        </section>
+
+        <section class="guide-block" id="last-word">
+          <h2>最後に</h2>
+          <p>完全無欠のOCRなど我々の住む世界には存在しないのですから…。</p>
+        </section>
 
         <p class="legal-links">
           <a href="./index.html">トップへ戻る</a>
           <a href="./guide-explainer.html">解説ガイドへ</a>
           <a href="./guide-howto.html">使い方ガイドへ</a>
         </p>
-      </section>
+      </article>
     </main>
   </body>
 </html>
