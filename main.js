@@ -285,7 +285,7 @@ const DEFAULT_SERVICE_CATALOG = {
 const SERVICE_CATALOG = getServiceCatalog();
 const LEARN_STORE_KEY = "apple_receipt_renamer_learning_v3";
 const ENABLE_LEARN_OVERRIDES = false;
-const BUILD_ID = "20260213ac";
+const BUILD_ID = "20260213ad";
 const APPLE_SINGLE_DEBUG_TARGET = "";
 const PDFJS_WORKER_URL = "https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js";
 const MULTIPLICITY_ONLY_MODE = true;
@@ -4907,7 +4907,7 @@ function downloadBlob(blob, name) {
 
 function setStatus(message, isError = false) {
   statusText.textContent = message;
-  statusText.style.color = isError ? "var(--danger)" : "#aef8dd";
+  statusText.style.color = isError ? "var(--danger)" : "var(--primary-2)";
 }
 
 function withBuildTag(message) {
