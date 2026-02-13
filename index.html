@@ -11,8 +11,8 @@
       gtag("js", new Date());
       gtag("config", "G-LEQXDJXK6L");
     </script>
-    <title>Appleの領収書のスクショにタイトルを自動でつけるサイト</title>
-    <link rel="stylesheet" href="./styles.css?v=20260213ae" />
+    <title>メールで送られてきたAppleの領収書スクショに自動でタイトルをつけるツール</title>
+    <link rel="stylesheet" href="./styles.css?v=20260213af" />
   </head>
   <body>
     <div class="bg-glow bg-glow-a"></div>
@@ -20,9 +20,10 @@
 
     <main class="app">
       <div class="brand-bar">
-        <img src="./sctol-logo.svg?v=20260213ac" alt="SCTOL logo" class="brand-logo" />
+        <img src="./sctol-logo.svg?v=20260213af" alt="SCTOL logo" class="brand-logo" />
         <div class="brand-text">
           <p class="brand-name">SCTOL</p>
+          <p class="brand-kana">スクトル</p>
           <p class="brand-tag">Screenshot Control Tool</p>
         </div>
       </div>
@@ -33,9 +34,20 @@
           <button id="langEnBtn" type="button">EN</button>
         </div>
         <p class="eyebrow">Apple Receipt Batch Renamer</p>
-        <h1 id="heroTitle">Appleの領収書のスクショにタイトルを自動でつけるサイト</h1>
+        <h1 id="heroTitle">メールで送られてきたAppleの領収書スクショに自動でタイトルをつけるツール</h1>
         <p id="heroLead" class="lead">ジョークっぽいのに実用的。タイトルつけるのがめんどくせえスクショ領収書を同じ命名規則で一括整理できます。</p>
       </header>
+
+      <section class="security-strip" aria-label="security">
+        <p class="security-pill">
+          <span class="security-dot" aria-hidden="true"></span>
+          <svg class="security-shield" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            <path d="M9 12l2 2 4-4"></path>
+          </svg>
+          <span id="securityBadgeText">画像は外部送信されません</span>
+        </p>
+      </section>
 
       <section id="dropZone" class="drop-zone" aria-label="スクリーンショットまたはPDFをドロップ">
         <input id="fileInput" class="file-input" type="file" accept="image/*,application/pdf,.pdf" multiple />
@@ -43,27 +55,75 @@
         <p id="dropSub" class="drop-sub">またはファイル選択から追加</p>
       </section>
 
-      <section class="toolbar">
+      <section id="flowSection" class="flow-strip" aria-label="flow">
+        <p id="flowTitle" class="flow-title">3ステップで完了</p>
+        <div class="flow-row">
+          <article class="flow-step">
+            <div class="flow-icon flow-icon-blue" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                <line x1="8" y1="21" x2="16" y2="21"></line>
+                <line x1="12" y1="17" x2="12" y2="21"></line>
+              </svg>
+            </div>
+            <p id="flowStep1Label" class="flow-step-label">画像を選択</p>
+            <p id="flowStep1Sub" class="flow-step-sub">ドラッグ&ドロップ</p>
+          </article>
+          <span class="flow-arrow" aria-hidden="true">›</span>
+          <article class="flow-step flow-step-highlight">
+            <div class="flow-icon flow-icon-green" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M22.61 16.95A5 5 0 0 0 18 10h-1.26a8 8 0 0 0-7.05-6M5 5a8 8 0 0 0 4 15h9a5 5 0 0 0 1.7-.3"></path>
+                <line x1="1" y1="1" x2="23" y2="23"></line>
+              </svg>
+            </div>
+            <p id="flowStep2Label" class="flow-step-label">ブラウザ内で処理</p>
+            <p id="flowStep2Sub" class="flow-step-sub">外部送信なし</p>
+          </article>
+          <span class="flow-arrow" aria-hidden="true">›</span>
+          <article class="flow-step">
+            <div class="flow-icon flow-icon-purple" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+            </div>
+            <p id="flowStep3Label" class="flow-step-label">リネーム完了</p>
+            <p id="flowStep3Sub" class="flow-step-sub">ZIPでまとめて保存</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="toolbar preset-toolbar">
         <label class="preset-pill">
           <input id="compactMode" type="checkbox" checked />
           <span id="compactLabel">Apple領収書プリセット（会社名 + 日付 + 合計 + サービス名）</span>
         </label>
-        <label class="preset-pill">
-          <input id="groupByMonth" type="checkbox" checked />
-          <span id="groupLabel">ZIPで月別フォルダ分け</span>
-        </label>
-        <button id="downloadAllBtn" type="button">まとめて保存 (ZIP)</button>
-        <button id="exportCsvBtn" type="button">CSV出力</button>
-        <button id="clearAllBtn" type="button">全件クリア</button>
-        <button id="reloadBtn" type="button">再読み込み</button>
       </section>
 
       <section class="status-wrap">
         <p id="statusText">準備完了</p>
       </section>
 
-      <section>
-        <ul id="resultList" class="result-list" aria-live="polite"></ul>
+      <section id="step2Panel" class="step2-panel" hidden>
+        <section class="toolbar step2-option-toolbar">
+          <label class="preset-pill">
+            <input id="groupByMonth" type="checkbox" checked />
+            <span id="groupLabel">ZIPで月別フォルダ分け</span>
+          </label>
+        </section>
+
+        <section class="button-toolbar">
+          <button id="downloadAllBtn" type="button">まとめて保存 (ZIP)</button>
+          <button id="exportCsvBtn" type="button">CSV出力</button>
+          <button id="clearAllBtn" type="button">全件クリア</button>
+          <button id="reloadBtn" type="button">再読み込み</button>
+        </section>
+
+        <section>
+          <ul id="resultList" class="result-list" aria-live="polite"></ul>
+        </section>
       </section>
 
       <details id="noticeSection" class="notice notice-fold" aria-label="説明と免責">
@@ -163,9 +223,9 @@
     <script defer src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
-    <script defer src="./service-catalog.js?v=20260213ae"></script>
-    <script defer src="./updates.js?v=20260213ae"></script>
-    <script defer src="./main.js?v=20260213ae"></script>
+    <script defer src="./service-catalog.js?v=20260213af"></script>
+    <script defer src="./updates.js?v=20260213af"></script>
+    <script defer src="./main.js?v=20260213af"></script>
 
   </body>
 </html>

@@ -1,4 +1,5 @@
 const dropZone = document.getElementById("dropZone");
+const appRoot = document.querySelector("main.app");
 const fileInput = document.getElementById("fileInput");
 const statusText = document.getElementById("statusText");
 const resultList = document.getElementById("resultList");
@@ -13,8 +14,16 @@ const langJaBtn = document.getElementById("langJaBtn");
 const langEnBtn = document.getElementById("langEnBtn");
 const heroTitle = document.getElementById("heroTitle");
 const heroLead = document.getElementById("heroLead");
+const securityBadgeText = document.getElementById("securityBadgeText");
 const dropTitle = document.getElementById("dropTitle");
 const dropSub = document.getElementById("dropSub");
+const flowTitle = document.getElementById("flowTitle");
+const flowStep1Label = document.getElementById("flowStep1Label");
+const flowStep1Sub = document.getElementById("flowStep1Sub");
+const flowStep2Label = document.getElementById("flowStep2Label");
+const flowStep2Sub = document.getElementById("flowStep2Sub");
+const flowStep3Label = document.getElementById("flowStep3Label");
+const flowStep3Sub = document.getElementById("flowStep3Sub");
 const compactLabel = document.getElementById("compactLabel");
 const groupLabel = document.getElementById("groupLabel");
 const noticeTitle = document.getElementById("noticeTitle");
@@ -28,6 +37,8 @@ const termsLink = document.getElementById("termsLink");
 const updatesSection = document.getElementById("updatesSection");
 const updatesTitle = document.getElementById("updatesTitle");
 const updatesList = document.getElementById("updatesList");
+const flowSection = document.getElementById("flowSection");
+const step2Panel = document.getElementById("step2Panel");
 const guidesSection = document.getElementById("guidesSection");
 const guidesTitle = document.getElementById("guidesTitle");
 const guideExplainerLink = document.getElementById("guideExplainerLink");
@@ -51,11 +62,19 @@ let currentLang = localStorage.getItem(LANG_STORE_KEY) || "ja";
 
 const I18N = {
   ja: {
-    title: "Appleの領収書のスクショにタイトルを自動でつけるサイト",
+    title: "メールで送られてきたAppleの領収書スクショに自動でタイトルをつけるツール",
     hero: "ジョークっぽいのに実用的。タイトルつけるのがめんどくせえスクショ領収書を同じ命名規則で一括整理できます。",
+    securityBadge: "画像は外部送信されません",
     dropTitle: "ここにスクリーンショット/PDFをドロップ",
     dropSub: "またはファイル選択から追加",
     dropAria: "スクリーンショットまたはPDFをドロップ",
+    flowTitle: "3ステップで完了",
+    flowStep1Label: "画像を選択",
+    flowStep1Sub: "ドラッグ&ドロップ",
+    flowStep2Label: "ブラウザ内で処理",
+    flowStep2Sub: "外部送信なし",
+    flowStep3Label: "リネーム完了",
+    flowStep3Sub: "ZIPでまとめて保存",
     compactLabel: "Apple領収書プリセット（会社名 + 日付 + 合計 + サービス名）",
     groupLabel: "ZIPで月別フォルダ分け",
     downloadAll: "まとめて保存 (ZIP)",
@@ -154,9 +173,17 @@ const I18N = {
   en: {
     title: "Auto-title your Apple receipt screenshots",
     hero: "A joke-ish tool that's actually useful. Batch-organize Apple receipt screenshots with one naming rule.",
+    securityBadge: "Your images never leave this browser",
     dropTitle: "Drop screenshots or PDFs here",
     dropSub: "or add files from file picker",
     dropAria: "Drop screenshots or PDFs",
+    flowTitle: "Done in 3 steps",
+    flowStep1Label: "Select files",
+    flowStep1Sub: "Drag & drop",
+    flowStep2Label: "Process in browser",
+    flowStep2Sub: "No external upload",
+    flowStep3Label: "Renamed",
+    flowStep3Sub: "Save as ZIP",
     compactLabel: "Apple receipt preset (Company + Date + Total + Service)",
     groupLabel: "Group by month folders in ZIP",
     downloadAll: "Download All (ZIP)",
@@ -285,7 +312,7 @@ const DEFAULT_SERVICE_CATALOG = {
 const SERVICE_CATALOG = getServiceCatalog();
 const LEARN_STORE_KEY = "apple_receipt_renamer_learning_v3";
 const ENABLE_LEARN_OVERRIDES = false;
-const BUILD_ID = "20260213ae";
+const BUILD_ID = "20260213af";
 const APPLE_SINGLE_DEBUG_TARGET = "";
 const PDFJS_WORKER_URL = "https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js";
 const MULTIPLICITY_ONLY_MODE = true;
@@ -328,8 +355,16 @@ function init() {
     !langEnBtn ||
     !heroTitle ||
     !heroLead ||
+    !securityBadgeText ||
     !dropTitle ||
     !dropSub ||
+    !flowTitle ||
+    !flowStep1Label ||
+    !flowStep1Sub ||
+    !flowStep2Label ||
+    !flowStep2Sub ||
+    !flowStep3Label ||
+    !flowStep3Sub ||
     !compactLabel ||
     !groupLabel ||
     !noticeTitle ||
@@ -358,6 +393,7 @@ function init() {
   exportCsvBtn.disabled = true;
   clearAllBtn.disabled = true;
   applyLanguage();
+  updateToolbarState();
   setStatus(withBuildTag(t("statusPresetOn")));
   notifyBuildUpdateIfNeeded();
   loadUpdates();
@@ -446,9 +482,17 @@ function applyLanguage() {
   document.title = tr.title;
   heroTitle.textContent = tr.title;
   heroLead.textContent = tr.hero;
+  securityBadgeText.textContent = tr.securityBadge;
   dropTitle.textContent = tr.dropTitle;
   dropSub.textContent = tr.dropSub;
   if (dropZone) dropZone.setAttribute("aria-label", tr.dropAria);
+  flowTitle.textContent = tr.flowTitle;
+  flowStep1Label.textContent = tr.flowStep1Label;
+  flowStep1Sub.textContent = tr.flowStep1Sub;
+  flowStep2Label.textContent = tr.flowStep2Label;
+  flowStep2Sub.textContent = tr.flowStep2Sub;
+  flowStep3Label.textContent = tr.flowStep3Label;
+  flowStep3Sub.textContent = tr.flowStep3Sub;
   compactLabel.textContent = tr.compactLabel;
   groupLabel.textContent = tr.groupLabel;
   downloadAllBtn.textContent = tr.downloadAll;
@@ -862,6 +906,12 @@ function updateToolbarState() {
   downloadAllBtn.disabled = !hasAny;
   exportCsvBtn.disabled = !hasAny;
   clearAllBtn.disabled = !hasAny;
+  if (step2Panel) step2Panel.hidden = !hasAny;
+  if (flowSection) flowSection.hidden = hasAny;
+  if (appRoot) {
+    appRoot.classList.toggle("has-items", hasAny);
+    appRoot.classList.toggle("is-empty", !hasAny);
+  }
 }
 
 function updatePresetBlockState(item) {
